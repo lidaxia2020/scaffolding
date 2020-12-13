@@ -116,13 +116,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="admin-list.html">
+                        <a _href="/sysUser/admin-list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理员列表</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="admin-role.html">
+                        <a _href="/admin-role">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色管理</cite>
                         </a>

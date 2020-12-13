@@ -1,3 +1,4 @@
+<#assign ctxPath=request.contextPath />
 <!DOCTYPE html>
 <html class="x-admin-sm">
   
@@ -7,12 +8,12 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <link rel="stylesheet" href="./css/font.css">
-    <link rel="stylesheet" href="./css/xadmin.css">
+    <link rel="stylesheet" href="${ctxPath}/static/css/font.css">
+    <link rel="stylesheet" href="${ctxPath}/static/css/xadmin.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./js/xadmin.js"></script>
-    <script type="text/javascript" src="./js/cookie.js"></script>
+    <script type="text/javascript" src="${ctxPath}/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="${ctxPath}/static/js/xadmin.js"></script>
+    <script type="text/javascript" src="${ctxPath}/static/js/cookie.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -23,7 +24,7 @@
   <body>
     <div class="x-nav">
       <span class="layui-breadcrumb">
-        <a href="">首页</a>
+        <a href="/index">首页</a>
         <a href="">演示</a>
         <a>
           <cite>导航元素</cite></a>
@@ -42,7 +43,7 @@
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','./role-add.html')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
       <table class="layui-table">
@@ -52,11 +53,9 @@
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
             <th>ID</th>
-            <th>登录名</th>
-            <th>手机</th>
-            <th>邮箱</th>
-            <th>角色</th>
-            <th>加入时间</th>
+            <th>角色名</th>
+            <th>拥有权限规则</th>
+            <th>描述</th>
             <th>状态</th>
             <th>操作</th>
         </thead>
@@ -66,18 +65,16 @@
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>1</td>
-            <td>admin</td>
-            <td>18925139194</td>
-            <td>113664000@qq.com</td>
             <td>超级管理员</td>
-            <td>2017-01-01 11:11:42</td>
+            <td>会员列表，问题列表</td>
+            <td>具有至高无上的权利</td>
             <td class="td-status">
               <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
             <td class="td-manage">
               <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
                 <i class="layui-icon">&#xe601;</i>
               </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
+              <a title="编辑"  onclick="x_admin_show('编辑','role-add.html')" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
               <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
