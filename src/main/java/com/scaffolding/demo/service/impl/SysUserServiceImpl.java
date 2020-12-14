@@ -1,16 +1,14 @@
 package com.scaffolding.demo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.scaffolding.demo.dao.SysUserMapper;
-import com.scaffolding.demo.dto.SysUserDto;
 import com.scaffolding.demo.entity.SysUser;
 import com.scaffolding.demo.service.SysUserService;
 import com.scaffolding.demo.utils.PageUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Wrapper;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +20,7 @@ import java.util.Map;
  * @date 2020/12/12 17:03
  */
 @Service
-public class SysUserServiceImpl implements SysUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
     @Resource
     private SysUserMapper sysUserMapper;
@@ -40,7 +38,7 @@ public class SysUserServiceImpl implements SysUserService {
         String password = "";
         if (username.equals("admin")) {
             SysUser user = new SysUser();
-            user.setUserId(1L);
+            user.setId(1L);
             user.setUserName("admin");
             /**
              * 密码为123（通过BCryptPasswordEncoderl加密后的密文）
@@ -53,7 +51,7 @@ public class SysUserServiceImpl implements SysUserService {
             return user;
         } else if (username.equals("employee")) {
             SysUser user = new SysUser();
-            user.setUserId(2L);
+            user.setId(2L);
             user.setUserName("employee");
             /**
              * 密码为123（通过BCryptPasswordEncoderl加密后的密文）
@@ -65,7 +63,7 @@ public class SysUserServiceImpl implements SysUserService {
             return user;
         } else if (username.equals("temp")) {
             SysUser user = new SysUser();
-            user.setUserId(3L);
+            user.setId(3L);
             user.setUserName("temp");
             /**
              * 密码为123（通过BCryptPasswordEncoderl加密后的密文）
@@ -81,8 +79,8 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public Map list(int page, int pageSize,
-                    String username, LocalDateTime startTime,
-                    LocalDateTime endTime) {
+                    String username, String startTime,
+                    String endTime) {
 
 
         Map map = new HashMap();
@@ -91,19 +89,6 @@ public class SysUserServiceImpl implements SysUserService {
         map.put("list", list);
         map.put("total", total);
         return map;
-    }
-
-    @Override
-    public void add(SysUser sysUser) {
-
-        sysUserMapper.insert(sysUser);
-    }
-
-    @Override
-    public void delete(List<Integer> ids) {
-        QueryWrapper wrapper = new QueryWrapper();
-        wrapper.in("user_id", ids);
-        sysUserMapper.delete(wrapper);
     }
 
 }

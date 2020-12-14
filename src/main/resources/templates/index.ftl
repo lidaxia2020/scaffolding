@@ -1,26 +1,5 @@
-<!doctype html>
-<#assign ctxPath=request.contextPath />
-<html  class="x-admin-sm">
-<head>
-	<meta charset="UTF-8">
-	<title>天行健</title>
-	<meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="stylesheet" href="${ctxPath}/static/css/font.css">
-	<link rel="stylesheet" href="${ctxPath}/static/css/xadmin.css">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript"src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
-    <script src="${ctxPath}/static/lib/layui/layui.js" charset="utf-8"></script>
+<#include "./common/_top.ftl">
 
-    <script type="text/javascript" src="${ctxPath}/static/js/xadmin.js"></script>
-    <script type="text/javascript" src="${ctxPath}/static/js/cookie.js"></script>
-    <script>
-        // 是否开启刷新记忆tab功能
-        // var is_remember = false;
-    </script>
-</head>
 <body>
     <!-- 顶部开始 -->
     <div class="container">
@@ -83,7 +62,7 @@
     <!-- 中部结束 -->
     <!-- 底部开始 -->
     <div class="footer">
-        <div class="copyright">Copyright ©2017 x-admin v2.3 All Rights Reserved</div>  
+        <div class="copyright">Copyright ©2020 天行健 v1.0 All Rights Reserved</div>
     </div>
     <!-- 底部结束 -->
     <script>

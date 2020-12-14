@@ -41,7 +41,7 @@ admin_list.member_del = function (obj, id) {
             data: data,
             success: function (data) {
                 layer.msg('已删除!', {icon: 1, time: 1000});
-
+                location.reload();
             },
             error: function (jqXHR) {
                 console.log("发生错误：" + jqXHR.status);
@@ -90,8 +90,8 @@ admin_list.list = function () {
     });
 }
 
-$(function () {
-    // admin_list.list();
-    console.info("runoob");
-})
+// $(function () {
+//     // admin_list.list();
+//     console.info("runoob");
+// })
 

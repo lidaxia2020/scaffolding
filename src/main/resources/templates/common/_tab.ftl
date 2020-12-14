@@ -122,7 +122,7 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="/admin-role">
+                        <a _href="/sysRole/admin-role">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色管理</cite>
                         </a>

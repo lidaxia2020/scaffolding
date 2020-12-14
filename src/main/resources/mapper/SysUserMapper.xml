@@ -5,6 +5,18 @@
 
     <select id="list" resultType="com.scaffolding.demo.entity.SysUser">
         select * from sys_user
+        <include refid="whereif"></include>
+        <if test="offset != null and size != null and size != 0">
+            limit #{offset}, #{size}
+        </if>
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(id) from sys_user
+        <include refid="whereif"></include>
+    </select>
+
+    <sql id="whereif">
         <where>
             <if test="username != null and username != ''">
                 and user_name = #{username}
@@ -13,21 +25,6 @@
                 and login_date between #{startTime} and #{endTime}
             </if>
         </where>
-        <if test="offset != null and size != null and size != 0">
-            limit #{offset}, #{size}
-        </if>
-    </select>
-
-    <select id="count" resultType="java.lang.Integer">
-        select count(user_id) from sys_user
-        <where>
-            <if test="username != null and username != ''">
-                and user_name  = #{username}
-            </if>
-            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
-                and login_date between #{startTime} and #{endTime}
-            </if>
-        </where>
-    </select>
+    </sql>
 
 </mapper>

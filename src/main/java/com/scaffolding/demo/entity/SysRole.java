@@ -1,5 +1,6 @@
 package com.scaffolding.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
  * @date 2020/12/12 16:16
  */
 @Data
+@TableName("sys_role")
 public class SysRole {
 
     /**
@@ -77,7 +79,7 @@ public class SysRole {
      * 更新时间
      * isNullAble:1
      */
-    private java.time.LocalDateTime updateTime;
+    private LocalDateTime updateTime;
 
     /**
      * 备注

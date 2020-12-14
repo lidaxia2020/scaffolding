@@ -42,3 +42,7 @@ spring:
 # ��־
 #logging:
 #  config: classpath:logging-spring.xml
+# 打印sql到控制台
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

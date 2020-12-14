@@ -23,7 +23,7 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @param size
      * @return
      */
-    List<SysUser> list(@Param("username") String username, @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime, @Param("offset") Integer offset, @Param("size") Integer size);
+    List<SysUser> list(@Param("username") String username, @Param("startTime") String startTime, @Param("endTime") String endTime, @Param("offset") Integer offset, @Param("size") Integer size);
 
     /**
      * 查询总数
@@ -32,5 +32,5 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      * @param endTime
      * @return
      */
-    Integer count(@Param("username") String username, @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime);
+    Integer count(@Param("username") String username, @Param("startTime") String startTime, @Param("endTime") String endTime);
 }

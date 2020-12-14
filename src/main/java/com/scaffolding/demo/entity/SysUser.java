@@ -1,5 +1,8 @@
 package com.scaffolding.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -11,6 +14,7 @@ import java.util.List;
  * @date 2020/12/12 16:18
  */
 @Data
+@TableName("sys_user")
 public class SysUser {
 
     /**
@@ -18,7 +22,7 @@ public class SysUser {
      * 用户ID
      * isNullAble:0
      */
-    private Long userId;
+    private Long id;
 
     /**
      * 部门ID
@@ -96,6 +100,7 @@ public class SysUser {
      * 最后登陆时间
      * isNullAble:1
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private LocalDateTime loginDate;
 
     /**
@@ -129,6 +134,7 @@ public class SysUser {
     private String remark;
 
     /** 角色集合 */
+    @TableField(exist = false)
     private List<String> roles;
 
 }

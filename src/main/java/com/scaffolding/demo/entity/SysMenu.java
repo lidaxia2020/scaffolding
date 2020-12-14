@@ -1,5 +1,6 @@
 package com.scaffolding.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  * @date 2020/12/12 16:15
  */
 @Data
+@TableName("sys_menu")
 public class SysMenu {
 
     /**

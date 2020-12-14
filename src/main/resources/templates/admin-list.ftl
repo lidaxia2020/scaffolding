@@ -1,27 +1,4 @@
-<#assign ctxPath=request.contextPath />
-<!DOCTYPE html>
-<html class="x-admin-sm" xmlns="http://www.w3.org/1999/html">
-
-<head>
-    <meta charset="UTF-8">
-    <title>欢迎页面-X-admin2.1</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport"
-          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
-    <link rel="stylesheet" href="${ctxPath}/static/css/font.css">
-    <link rel="stylesheet" href="${ctxPath}/static/css/xadmin.css">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="${ctxPath}/static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="${ctxPath}/static/js/xadmin.js"></script>
-    <script type="text/javascript" src="${ctxPath}/static/js/cookie.js"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-
+<#include "./common/_top.ftl">
 <body>
 <div class="x-nav">
       <span class="layui-breadcrumb">
@@ -47,7 +24,7 @@
     </div>
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','/admin-add')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','/sysUser/admin-add')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：${data.total} 条</span>
     </xblock>
     <div id="index_table">
@@ -76,7 +53,7 @@
                         <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i
                                     class="layui-icon">&#xe605;</i></div>
                     </td>
-                    <td id="userId">${item.userId}</td>
+                    <td>${item.id}</td>
                     <td>${item.userName}</td>
                     <td>${item.nickName}</td>
                     <td>${item.phone}</td>
@@ -95,10 +72,10 @@
                         <a onclick="admin_list.member_stop(this,${item.userId})" href="javascript:;" title="启用">
                             <i class="layui-icon">&#xe601;</i>
                         </a>
-                        <a title="编辑" onclick="x_admin_show('编辑','/admin-edit')" href="javascript:;">
+                        <a title="编辑" onclick="x_admin_show('编辑', '/sysUser/admin-edit/'+  ${item.id} + '')" href="javascript:;">
                             <i class="layui-icon">&#xe642;</i>
                         </a>
-                        <a title="删除" onclick="admin_list.member_del(this,${item.userId})" href="javascript:;">
+                        <a title="删除" onclick="admin_list.member_del(this, ${item.id})" href="javascript:;">
                             <i class="layui-icon">&#xe640;</i>
                         </a>
                     </td>

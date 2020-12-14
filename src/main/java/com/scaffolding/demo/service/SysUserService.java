@@ -1,10 +1,7 @@
 package com.scaffolding.demo.service;
 
-import com.scaffolding.demo.dto.SysUserDto;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.scaffolding.demo.entity.SysUser;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -13,15 +10,21 @@ import java.util.Map;
  * @version 1.0
  * @date 2020/12/12 17:03
  */
-public interface SysUserService {
+public interface SysUserService extends IService<SysUser> {
 
     SysUser getAuthUserByUsername(String username);
 
+    /**
+     * 获取页面列表
+     * @param page
+     * @param pageSize
+     * @param username
+     * @param startTime
+     * @param endTime
+     * @return
+     */
     Map list(int page, int pageSize,
-             String username, LocalDateTime startTime,
-             LocalDateTime endTime);
+             String username, String startTime,
+             String endTime);
 
-    void add(SysUser sysUser);
-
-    void delete(List<Integer> ids);
 }

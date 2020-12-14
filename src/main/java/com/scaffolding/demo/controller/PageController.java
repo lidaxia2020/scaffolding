@@ -51,24 +51,6 @@ public class PageController {
 
 
 
-    @RequestMapping("/admin-add")
-    public String admin_add() {
-
-        return "/admin-add";
-    }
-
-    @RequestMapping("/admin-edit")
-    public String admin_edit() {
-
-        return "/admin-edit";
-    }
-
-
-    @RequestMapping("/admin-role")
-    public String admin_role() {
-
-        return "/admin-role";
-    }
 
 //    @RequestMapping("/error")
 //    public String error() {
