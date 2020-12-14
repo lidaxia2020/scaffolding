@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-    <property name="project.name" value="janche"/>
+    <property name="project.name" value="scaffolding"/>
     <property name="log" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] --- %logger{36} - %msg%n"/>
     <property name="log.path" value="log"/>
     <property name="file.Size" value="10MB"/>
@@ -84,13 +84,13 @@
         </filter>
     </appender>
 
-    <!--<root level="INFO">-->
-    <!--<appender-ref ref="console"/>-->
-    <!--&lt;!&ndash;开发阶段不生成日志文件，需要就放开即可&ndash;&gt;-->
-    <!--&lt;!&ndash;<appender-ref ref="WARN_FILE"/>-->
-    <!--<appender-ref ref="INFO_FILE"/>-->
-    <!--<appender-ref ref="ERROR_FILE"/>&ndash;&gt;-->
-    <!--</root>-->
+    <root level="INFO">
+    <appender-ref ref="console"/>
+    <!--开发阶段不生成日志文件，需要就放开即可-->
+    <appender-ref ref="WARN_FILE"/>
+    <appender-ref ref="INFO_FILE"/>
+    <appender-ref ref="ERROR_FILE"/>
+    </root>
 
 
     <!-- 测试环境+开发环境. 多个使用逗号隔开. -->

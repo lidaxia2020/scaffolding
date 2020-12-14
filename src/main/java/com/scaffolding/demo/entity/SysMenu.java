@@ -1,5 +1,7 @@
 package com.scaffolding.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -17,6 +19,7 @@ public class SysMenu {
      * 菜单ID
      * isNullAble:0
      */
+    @TableId(value = "id",type = IdType.AUTO)
     private Long menuId;
 
     /**

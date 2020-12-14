@@ -3,6 +3,8 @@ server:
 
 
 spring:
+  profiles:
+    active: dev
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/scaffolding?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
@@ -40,8 +42,9 @@ spring:
     time-zone: GMT+8
 
 # ��־
-#logging:
-#  config: classpath:logging-spring.xml
+logging:
+  config: classpath:logging-spring.xml
+  path: D:\ideause\scaffolding\log\2020-12-14
 # 打印sql到控制台
 #mybatis-plus:
 #  configuration:

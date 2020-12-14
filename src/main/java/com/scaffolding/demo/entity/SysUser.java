@@ -1,6 +1,8 @@
 package com.scaffolding.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -22,6 +24,7 @@ public class SysUser {
      * 用户ID
      * isNullAble:0
      */
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
     /**
