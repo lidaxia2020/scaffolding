@@ -1,5 +1,6 @@
 package com.scaffolding.demo.controller;
 
+import com.scaffolding.demo.dto.SysUserDto;
 import com.scaffolding.demo.entity.SysUser;
 import com.scaffolding.demo.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +24,25 @@ public class SysUserController {
     private SysUserService sysUserService;
 
     @RequestMapping("/admin-list")
-    public ModelAndView adminList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int pageSize,
+    public ModelAndView adminList(@ModelAttribute SysUserDto sysUserDto) {
+        ModelAndView modelAndView = new ModelAndView();
+        Map data = sysUserService.list(sysUserDto.getPage(), sysUserDto.getSize(),
+                sysUserDto.getUsername(), sysUserDto.getStartTime(),
+                sysUserDto.getEndTime());
+        modelAndView.addObject("data", data);
+        modelAndView.addObject("sysUserDto", sysUserDto);
+        modelAndView.setViewName("/admin-list");
+        return modelAndView;
+    }
+
+    @RequestMapping("/list")
+    public Object list(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int pageSize,
                                   @RequestParam(required = false) String username,
                                   @RequestParam(required = false) String startTime,
                                   @RequestParam(required = false) String endTime) {
-        ModelAndView modelAndView = new ModelAndView();
-        Map data = sysUserService.list(page, pageSize,
+        return sysUserService.list(page, pageSize,
                 username, startTime,
                 endTime);
-        modelAndView.addObject("data", data);
-        modelAndView.setViewName("/admin-list");
-        return modelAndView;
     }
 
     @RequestMapping("/admin-add")

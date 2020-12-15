@@ -4,9 +4,9 @@
 <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">演示</a>
+        <a href="">管理员管理</a>
         <a>
-          <cite>导航元素88</cite></a>
+          <cite>菜单管理</cite></a>
       </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        href="javascript:location.replace(location.href);" title="刷新">
@@ -55,9 +55,11 @@
                         class="layui-icon">&#xe605;</i></div>
             </th>
             <th>ID</th>
-            <th>权限规则</th>
-            <th>权限名称</th>
-            <th>所属分类</th>
+            <th>菜单名称</th>
+            <th>父菜单ID</th>
+            <th>路由地址</th>
+            <th>是否为外链（0是 1否）</th>
+            <th>菜单状态</th>
             <th>操作</th>
         </thead>
         <tbody>
@@ -70,6 +72,8 @@
             <td>admin/user/userlist</td>
             <td>会员列表</td>
             <td>会员相关</td>
+            <td>admin/user/userlist</td>
+            <td>会员列表</td>
             <td class="td-manage">
                 <a title="编辑" onclick="x_admin_show('编辑','xxx.html')" href="javascript:;">
                     <i class="layui-icon">&#xe642;</i>
@@ -81,16 +85,16 @@
         </tr>
         </tbody>
     </table>
-    <div class="page">
-        <div>
-            <a class="prev" href="">&lt;&lt;</a>
-            <a class="num" href="">1</a>
-            <span class="current">2</span>
-            <a class="num" href="">3</a>
-            <a class="num" href="">489</a>
-            <a class="next" href="">&gt;&gt;</a>
-        </div>
-    </div>
+<#--    <div class="page">-->
+<#--        <div>-->
+<#--            <a class="prev" href="">&lt;&lt;</a>-->
+<#--            <a class="num" href="">1</a>-->
+<#--            <span class="current">2</span>-->
+<#--            <a class="num" href="">3</a>-->
+<#--            <a class="num" href="">489</a>-->
+<#--            <a class="next" href="">&gt;&gt;</a>-->
+<#--        </div>-->
+<#--    </div>-->
 
 </div>
 <script>

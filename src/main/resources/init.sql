@@ -35,10 +35,8 @@ CREATE TABLE sys_user_role (
 CREATE TABLE sys_role (
 	id BIGINT (20) NOT NULL auto_increment COMMENT '角色ID',
 	role_name VARCHAR (30) NOT NULL COMMENT '角色名称',
-	role_key VARCHAR (100) NOT NULL COMMENT '角色权限字符串',
 	role_sort INT (4) NOT NULL COMMENT '显示顺序',
-	data_scope CHAR (1) DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
-	STATUS CHAR (1) NOT NULL COMMENT '角色状态（0正常 1停用）',
+	status CHAR (1) NOT NULL COMMENT '角色状态（0正常 1停用）',
 	del_flag CHAR (1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
 	create_by VARCHAR (64) DEFAULT '' COMMENT '创建者',
 	create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

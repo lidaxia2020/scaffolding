@@ -4,9 +4,9 @@
 <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="/index">首页</a>
-        <a href="">演示</a>
+        <a href="">管理员管理</a>
         <a>
-          <cite>导航元素</cite></a>
+          <cite>角色管理</cite></a>
       </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        href="javascript:location.replace(location.href);" title="刷新">
@@ -36,9 +36,8 @@
             </th>
             <th>ID</th>
             <th>角色名</th>
-            <th>拥有权限规则</th>
+            <th>角色状态（0正常 1停用）</th>
             <th>描述</th>
-            <th>状态</th>
             <th>操作</th>
         </thead>
         <tbody>
@@ -50,7 +49,6 @@
             <td>1</td>
             <td>超级管理员</td>
             <td>会员列表，问题列表</td>
-            <td>具有至高无上的权利</td>
             <td class="td-status">
                 <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
             <td class="td-manage">
@@ -67,16 +65,6 @@
         </tr>
         </tbody>
     </table>
-    <div class="page">
-        <div>
-            <a class="prev" href="">&lt;&lt;</a>
-            <a class="num" href="">1</a>
-            <span class="current">2</span>
-            <a class="num" href="">3</a>
-            <a class="num" href="">489</a>
-            <a class="next" href="">&gt;&gt;</a>
-        </div>
-    </div>
 
 </div>
 <script>

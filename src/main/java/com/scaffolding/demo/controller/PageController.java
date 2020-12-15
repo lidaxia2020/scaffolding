@@ -49,8 +49,50 @@ public class PageController {
         return "/member-list";
     }
 
+    @RequestMapping("/echarts1")
+    public String echarts1() {
 
+        return "/echarts1";
+    }
+    @RequestMapping("/echarts2")
+    public String echarts2() {
 
+        return "/echarts2";
+    }
+
+    @RequestMapping("/echarts3")
+    public String echarts3() {
+
+        return "/echarts3";
+    }
+
+    @RequestMapping("/echarts4")
+    public String echarts4() {
+
+        return "/echarts4";
+    }
+    @RequestMapping("/echarts5")
+    public String echarts5() {
+
+        return "/echarts5";
+    }
+
+    @RequestMapping("/echarts6")
+    public String echarts6() {
+
+        return "/echarts6";
+    }
+    @RequestMapping("/echarts7")
+    public String echarts7() {
+
+        return "/echarts7";
+    }
+
+    @RequestMapping("/echarts8")
+    public String echarts8() {
+
+        return "/echarts8";
+    }
 
 //    @RequestMapping("/error")
 //    public String error() {

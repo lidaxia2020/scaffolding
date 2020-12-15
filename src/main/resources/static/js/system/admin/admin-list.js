@@ -94,4 +94,3 @@ admin_list.list = function () {
 //     // admin_list.list();
 //     console.info("runoob");
 // })
-

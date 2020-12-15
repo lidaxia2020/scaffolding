@@ -127,16 +127,16 @@
                             <cite>角色管理</cite>
                         </a>
                     </li >
+<#--                    <li>-->
+<#--                        <a _href="admin-cate.html">-->
+<#--                            <i class="iconfont">&#xe6a7;</i>-->
+<#--                            <cite>权限分类</cite>-->
+<#--                        </a>-->
+<#--                    </li >-->
                     <li>
-                        <a _href="admin-cate.html">
+                        <a _href="/sysMenu//admin-menu">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限分类</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="admin-rule.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限管理</cite>
+                            <cite>菜单管理管理</cite>
                         </a>
                     </li >
                 </ul>
@@ -149,49 +149,49 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="echarts1.html">
+                        <a _href="/echarts1">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>拆线图</cite>
                         </a>
                     </li >
                     <li>
-                        <a _href="echarts2.html">
+                        <a _href="/echarts2">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>柱状图</cite>
                         </a>
                     </li>
                     <li>
-                        <a _href="echarts3.html">
+                        <a _href="/echarts3">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>地图</cite>
                         </a>
                     </li>
                     <li>
-                        <a _href="echarts4.html">
+                        <a _href="/echarts4">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>饼图</cite>
                         </a>
                     </li>
                     <li>
-                        <a _href="echarts5.html">
+                        <a _href="/echarts5">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>雷达图</cite>
                         </a>
                     </li>
                     <li>
-                        <a _href="echarts6.html">
+                        <a _href="/echarts6">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>k线图</cite>
                         </a>
                     </li>
                     <li>
-                        <a _href="echarts7.html">
+                        <a _href="/echarts7">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>热力图</cite>
                         </a>
                     </li>
                     <li>
-                        <a _href="echarts8.html">
+                        <a _href="/echarts8">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>仪表图</cite>
                         </a>

@@ -1,4 +1,6 @@
 <#include "./common/_top.ftl">
+<link rel="stylesheet" href="${ctxPath}/static/css/page.css">
+
 <body>
 <div class="x-nav">
       <span class="layui-breadcrumb">
@@ -14,10 +16,10 @@
 <div class="x-body">
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="/sysUser/admin-list" method="get">
-            <input class="layui-input" placeholder="开始日" name="startTime" id="startTime">
-            <input class="layui-input" placeholder="截止日" name="endTime" id="endTime">
+            <input class="layui-input" placeholder="开始日" name="startTime" id="startTime" value="${sysUserDto.startTime}" />
+            <input class="layui-input" placeholder="截止日" name="endTime" id="endTime" value="${sysUserDto.endTime}" />
             <input type="text" name="username" id="username" placeholder="请输入用户名" autocomplete="off"
-                   class="layui-input">
+                   class="layui-input" value="${sysUserDto.username}" />
             <button class="layui-btn" lay-submit="" lay-filter="sreach" type="submit"><i
                         class="layui-icon">&#xe615;</i></button>
         </form>
@@ -84,19 +86,28 @@
             </tbody>
         </table>
     </div>
-    <div class="paging">
-        <#--        <div>-->
-        <#--            <a class="prev" href="">&lt;&lt;</a>-->
-        <#--            <a class="num" href="">1</a>-->
-        <#--            <span class="current">2</span>-->
-        <#--            <a class="num" href="">3</a>-->
-        <#--            <a class="num" href="">489</a>-->
-        <#--            <a class="next" href="">&gt;&gt;</a>-->
-        <#--        </div>-->
-    </div>
-
+<#--    <div class="page">-->
+<#--                <div>-->
+<#--                    <a class="prev" href="">&lt;&lt;</a>-->
+<#--                    <a class="num" href="">1</a>-->
+<#--                    <span class="current">2</span>-->
+<#--                    <a class="num" href="">3</a>-->
+<#--                    <a class="num" href="">489</a>-->
+<#--                    <a class="next" href="">&gt;&gt;</a>-->
+<#--                </div>-->
+<#--    </div>-->
+    <div class="paging"></div>
 </div>
+
+
+<script type="text/javascript" src="${ctxPath}/static/js/page.js"></script>
 <script type="text/javascript" src="${ctxPath}/static/js/system/admin/admin-list.js"></script>
+<script>
+    let paging = new Paging({
+        total: ${data.total},
+    })
+</script>
+
 <script>
     layui.use('laydate', function () {
         var laydate = layui.laydate;

@@ -15,7 +15,7 @@ public class SysUserDto extends PageParam {
 
     private String username;
 
-    private LocalDateTime startTime;
+    private String startTime;
 
-    private LocalDateTime endTime;
+    private String endTime;
 }
