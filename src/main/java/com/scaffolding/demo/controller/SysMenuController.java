@@ -1,5 +1,7 @@
 package com.scaffolding.demo.controller;
 
+import com.scaffolding.demo.service.SysMenuService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/sysMenu")
 public class SysMenuController {
+
+    @Autowired
+    private SysMenuService sysMenuService;
+
 
     @RequestMapping("/admin-menu")
     public String adminMenu() {

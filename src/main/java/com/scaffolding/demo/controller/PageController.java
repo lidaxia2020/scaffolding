@@ -32,10 +32,14 @@ public class PageController {
 
     private MessageSource messageSource;
 
+    /**
+     * 国际化测试
+     * @return
+     */
     @RequestMapping("/test")
     @ResponseBody
     public String test(){
-        System.out.println(messageSource.getMessage("username", null, Locale.ENGLISH));
+        System.out.println(messageSource.getMessage("username", null, Locale.US));
         Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage("username", null, locale);
     }

@@ -3,9 +3,8 @@
 <body>
 <div class="x-body">
     <blockquote class="layui-elem-quote">欢迎管理员：
-        <span class="x-red">test</span>！当前时间:2018-04-25 20:50:53 <a
-                onclick="parent.x_admin_add_to_tab('在tab打开','https://www.163.com',true)" style="color: red"
-                href="javascript:;">在tab打开</a>
+        <span class="x-red">test</span>！
+        <span class="x-right" style="line-height:40px">当前时间: <label id="showTime"></label></span>
     </blockquote>
     <#--        <fieldset class="layui-elem-field">-->
     <#--            <legend>数据统计</legend>-->
@@ -119,6 +118,40 @@
         </div>
     </fieldset>
     <fieldset class="layui-elem-field">
+        <legend></legend>
+        <div class="layui-field-box">
+            <table class="layui-table">
+                <tbody>
+                <tr>
+                    <th>Tomcat.版本</th>
+                    <td>1.0.180420</td>
+                </tr>
+                <tr>
+                    <th>JVM.版本</th>
+                    <td>${javaRuntimeVersion}</td>
+                </tr>
+                <tr>
+                    <th>OS.名称</th>
+                    <td>${osName}</td>
+                </tr>
+                <tr>
+                    <th>操作系统架构</th>
+                    <td>${osVersion}</td>
+                </tr>
+                <tr>
+                    <th>主机名</th>
+                    <td>${hostName}</td>
+                </tr>
+                <tr>
+                    <th>IP地址</th>
+                    <td>${hostAddress}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+
+    <fieldset class="layui-elem-field">
         <legend>开发团队</legend>
         <div class="layui-field-box">
             <table class="layui-table">
@@ -146,6 +179,16 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
+
+    var t = null;
+    t = setTimeout(time, 1000);//開始运行
+    function time() {
+        clearTimeout(t);//清除定时器
+        dt = new Date();
+        let s1 = dt.toLocaleString();
+        document.getElementById("showTime").innerHTML = s1;
+        t = setTimeout(time, 1000); //设定定时器，循环运行
+    }
 </script>
 </body>
 </html>

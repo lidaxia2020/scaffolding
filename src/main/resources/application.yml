@@ -42,6 +42,7 @@ spring:
     time-zone: GMT+8
   messages:
     basename: i18n/messages
+    encoding: UTF-8
 
 # ��־
 logging:

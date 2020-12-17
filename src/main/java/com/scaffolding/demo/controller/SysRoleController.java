@@ -1,7 +1,13 @@
 package com.scaffolding.demo.controller;
 
+import com.scaffolding.demo.entity.SysRole;
+import com.scaffolding.demo.service.SysRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * @author lidaxia
@@ -12,11 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/sysRole")
 public class SysRoleController {
 
+    @Autowired
+    private SysRoleService sysRoleService;
 
     @RequestMapping("/admin-role")
-    public String adminRole() {
+    public ModelAndView adminRole() {
+        List<SysRole> list = sysRoleService.list();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("list", list);
+        modelAndView.setViewName("/admin-role");
 
-        return "/admin-role";
+        return modelAndView;
     }
 
     @RequestMapping("/role-add")
