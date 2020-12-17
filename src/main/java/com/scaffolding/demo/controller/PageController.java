@@ -1,5 +1,6 @@
 package com.scaffolding.demo.controller;
 
+import lombok.var;
 import org.apache.tomcat.util.security.Escape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -16,9 +17,7 @@ import java.lang.management.MemoryPoolMXBean;
 import java.lang.management.MemoryUsage;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Locale;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author lidaxia
@@ -32,10 +31,20 @@ public class PageController {
 
     private MessageSource messageSource;
 
-    /**
-     * 国际化测试
-     * @return
-     */
+    @RequestMapping("/Home/AsycData")
+    @ResponseBody
+    public Object home(){
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.add(new Random().nextInt(10));
+        return objects;
+    }
+
+
+
+        /**
+         * 国际化测试
+         * @return
+         */
     @RequestMapping("/test")
     @ResponseBody
     public String test(){
