@@ -139,6 +139,7 @@
             }
             result.push(sum / dayCount);
         }
+        console.info(result);
         return result;
     }
 

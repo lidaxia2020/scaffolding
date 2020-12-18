@@ -1,5 +1,6 @@
 package com.scaffolding.demo.controller;
 
+import com.sun.management.OperatingSystemMXBean;
 import lombok.var;
 import org.apache.tomcat.util.security.Escape;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.support.RequestContextUtils;
+import oshi.SystemInfo;
+import oshi.hardware.CentralProcessor;
 
 import java.io.PrintWriter;
 import java.lang.management.ManagementFactory;
@@ -17,7 +19,10 @@ import java.lang.management.MemoryPoolMXBean;
 import java.lang.management.MemoryUsage;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author lidaxia
@@ -28,26 +33,54 @@ import java.util.*;
 public class PageController {
 
     @Autowired
-
     private MessageSource messageSource;
+
+    static int i = 1;
 
     @RequestMapping("/Home/AsycData")
     @ResponseBody
-    public Object home(){
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.add(new Random().nextInt(10));
-        return objects;
+    public Object home() throws InterruptedException {
+        Map map = new HashMap();
+        // cpu 情况
+        SystemInfo systemInfo = new SystemInfo();
+        CentralProcessor processor = systemInfo.getHardware().getProcessor();
+        long[] prevTicks = processor.getSystemCpuLoadTicks();
+        TimeUnit.SECONDS.sleep(1);
+        long[] ticks = processor.getSystemCpuLoadTicks();
+        long nice = ticks[CentralProcessor.TickType.NICE.getIndex()]
+                - prevTicks[CentralProcessor.TickType.NICE.getIndex()];
+        long irq = ticks[CentralProcessor.TickType.IRQ.getIndex()]
+                - prevTicks[CentralProcessor.TickType.IRQ.getIndex()];
+        long softirq = ticks[CentralProcessor.TickType.SOFTIRQ.getIndex()]
+                - prevTicks[CentralProcessor.TickType.SOFTIRQ.getIndex()];
+        long steal = ticks[CentralProcessor.TickType.STEAL.getIndex()]
+                - prevTicks[CentralProcessor.TickType.STEAL.getIndex()];
+        long cSys = ticks[CentralProcessor.TickType.SYSTEM.getIndex()]
+                - prevTicks[CentralProcessor.TickType.SYSTEM.getIndex()];
+        long user = ticks[CentralProcessor.TickType.USER.getIndex()]
+                - prevTicks[CentralProcessor.TickType.USER.getIndex()];
+        long iowait = ticks[CentralProcessor.TickType.IOWAIT.getIndex()]
+                - prevTicks[CentralProcessor.TickType.IOWAIT.getIndex()];
+        long idle = ticks[CentralProcessor.TickType.IDLE.getIndex()]
+                - prevTicks[CentralProcessor.TickType.IDLE.getIndex()];
+        long totalCpu = user + nice + cSys + idle + iowait + irq + softirq + steal;
+
+        map.put("cpuData", new DecimalFormat("#.##").format(user * 1.0 / totalCpu));
+        map.put("timeData", new SimpleDateFormat("HH:mm:ss").format(new Date()));
+        map.put("memoryData", formatSize(
+                Long.valueOf(Runtime.getRuntime().freeMemory()), true).replace("MB", ""));
+        return map;
     }
 
 
-
-        /**
-         * 国际化测试
-         * @return
-         */
+    /**
+     * 国际化测试
+     *
+     * @return
+     */
     @RequestMapping("/test")
     @ResponseBody
-    public String test(){
+    public String test() {
         System.out.println(messageSource.getMessage("username", null, Locale.US));
         Locale locale = LocaleContextHolder.getLocale();
         return messageSource.getMessage("username", null, locale);
@@ -69,6 +102,57 @@ public class PageController {
             modelAndView.addObject("hostName", "-");
             modelAndView.addObject("hostAddress", "-");
         }
+
+
+        // cpu 情况
+        SystemInfo systemInfo = new SystemInfo();
+        CentralProcessor processor = systemInfo.getHardware().getProcessor();
+        long[] prevTicks = processor.getSystemCpuLoadTicks();
+        // 睡眠1s
+        long[] ticks = processor.getSystemCpuLoadTicks();
+        long nice = ticks[CentralProcessor.TickType.NICE.getIndex()]
+                - prevTicks[CentralProcessor.TickType.NICE.getIndex()];
+        long irq = ticks[CentralProcessor.TickType.IRQ.getIndex()]
+                - prevTicks[CentralProcessor.TickType.IRQ.getIndex()];
+        long softirq = ticks[CentralProcessor.TickType.SOFTIRQ.getIndex()]
+                - prevTicks[CentralProcessor.TickType.SOFTIRQ.getIndex()];
+        long steal = ticks[CentralProcessor.TickType.STEAL.getIndex()]
+                - prevTicks[CentralProcessor.TickType.STEAL.getIndex()];
+        long cSys = ticks[CentralProcessor.TickType.SYSTEM.getIndex()]
+                - prevTicks[CentralProcessor.TickType.SYSTEM.getIndex()];
+        long user = ticks[CentralProcessor.TickType.USER.getIndex()]
+                - prevTicks[CentralProcessor.TickType.USER.getIndex()];
+        long iowait = ticks[CentralProcessor.TickType.IOWAIT.getIndex()]
+                - prevTicks[CentralProcessor.TickType.IOWAIT.getIndex()];
+        long idle = ticks[CentralProcessor.TickType.IDLE.getIndex()]
+                - prevTicks[CentralProcessor.TickType.IDLE.getIndex()];
+        long totalCpu = user + nice + cSys + idle + iowait + irq + softirq + steal;
+        modelAndView.addObject("systemsAuditing", processor.getLogicalProcessorCount());
+        System.err.println("cpu系统使用率:" + new DecimalFormat("#.##%").format(cSys * 1.0 / totalCpu));
+        System.err.println("cpu用户使用率:" + new DecimalFormat("#.##%").format(user * 1.0 / totalCpu));
+        System.err.println("cpu当前等待率:" + new DecimalFormat("#.##%").format(iowait * 1.0 / totalCpu));
+        System.err.println("cpu当前空闲率:" + new DecimalFormat("#.##%").format(idle * 1.0 / totalCpu));
+        System.err.format("CPU load: %.1f%% (counting ticks)%n", processor.getSystemCpuLoadBetweenTicks() * 100);
+        System.err.format("CPU load: %.1f%% (OS MXBean)%n", processor.getSystemCpuLoad() * 100);
+
+        // 内存情况
+        OperatingSystemMXBean osmxb = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        // 总的物理内存
+        String totalMemorySize = new DecimalFormat("#.##")
+                .format(osmxb.getTotalPhysicalMemorySize() / 1024.0 / 1024 / 1024) + "G";
+        // 剩余的物理内存
+        String freePhysicalMemorySize = new DecimalFormat("#.##")
+                .format(osmxb.getFreePhysicalMemorySize() / 1024.0 / 1024 / 1024) + "G";
+        // 已使用的物理内存
+        String usedMemory = new DecimalFormat("#.##").format(
+                (osmxb.getTotalPhysicalMemorySize() - osmxb.getFreePhysicalMemorySize()) / 1024.0 / 1024 / 1024)
+                + "G";
+
+        modelAndView.addObject("totalMemorySize", totalMemorySize);
+        modelAndView.addObject("freePhysicalMemorySize", freePhysicalMemorySize);
+        modelAndView.addObject("usedMemory", usedMemory);
+
+
         modelAndView.setViewName("/welcome");
         return modelAndView;
     }
@@ -82,16 +166,16 @@ public class PageController {
             throws Exception {
 
         SortedMap<String, MemoryPoolMXBean> memoryPoolMBeans = new TreeMap<>();
-        for (MemoryPoolMXBean mbean: ManagementFactory.getMemoryPoolMXBeans()) {
+        for (MemoryPoolMXBean mbean : ManagementFactory.getMemoryPoolMXBeans()) {
             String sortKey = mbean.getType() + ":" + mbean.getName();
             memoryPoolMBeans.put(sortKey, mbean);
         }
 
-        if (mode == 0){
+        if (mode == 0) {
             writer.print("<h1>JVM</h1>");
 
             writer.print("<p>");
-            writer.print( args[0] );
+            writer.print(args[0]);
             writer.print(' ');
             writer.print(formatSize(
                     Long.valueOf(Runtime.getRuntime().freeMemory()), true));
@@ -129,7 +213,7 @@ public class PageController {
                 writer.write("</td></tr>");
             }
             writer.write("</tbody></table>");
-        } else if (mode == 1){
+        } else if (mode == 1) {
             writer.write("<jvm>");
 
             writer.write("<memory");
@@ -159,7 +243,7 @@ public class PageController {
      * Display the given size in bytes, either as KB or MB.
      *
      * @param obj The object to format
-     * @param mb true to display megabytes, false for kilobytes
+     * @param mb  true to display megabytes, false for kilobytes
      * @return formatted size
      */
     public static String formatSize(Object obj, boolean mb) {
@@ -199,6 +283,12 @@ public class PageController {
         return "/index";
     }
 
+    @RequestMapping("/login")
+    public String login() {
+
+        return "/login";
+    }
+
     @RequestMapping("/member-list")
     public String member_list() {
 
@@ -210,6 +300,7 @@ public class PageController {
 
         return "/echarts1";
     }
+
     @RequestMapping("/echarts2")
     public String echarts2() {
 
@@ -227,6 +318,7 @@ public class PageController {
 
         return "/echarts4";
     }
+
     @RequestMapping("/echarts5")
     public String echarts5() {
 
@@ -238,6 +330,7 @@ public class PageController {
 
         return "/echarts6";
     }
+
     @RequestMapping("/echarts7")
     public String echarts7() {
 
@@ -255,7 +348,6 @@ public class PageController {
 //
 //        return "/error";
 //    }
-
 
 
 }

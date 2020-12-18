@@ -6,6 +6,7 @@ import com.scaffolding.demo.dao.SysUserMapper;
 import com.scaffolding.demo.entity.SysUser;
 import com.scaffolding.demo.service.SysUserService;
 import com.scaffolding.demo.utils.PageUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,8 +35,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
          * employee用户拥有 ROLE_EMPLOYEE 这个角色
          * temp用户没有角色
          */
-//        String password = new BCryptPasswordEncoder().encode("123");
-        String password = "";
+        String password = new BCryptPasswordEncoder().encode("123");
+//        String password = "";
         if (username.equals("admin")) {
             SysUser user = new SysUser();
             user.setId(1L);

@@ -6,4 +6,7 @@ _/  |_|__|____    ____ ___  __|__| ____    ____    |__|__|____    ____
  |__| |__(____  /___|  /__/\_ \__|___|  /\___  /\__|  |__(____  /___|  /
               \/     \/      \/       \//_____/\______|       \/     \/
 
-SpringBoot : ${spring-boot.version}
+Application Name: ${spring.application.name}
+Application Profile: ${spring.profiles.active}
+Server Port: ${server.port}
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
