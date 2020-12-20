@@ -24,6 +24,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsServiceImpl;
 
+    @Autowired
+    private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+
     /**
      * 用户认证配置
      */
@@ -51,8 +54,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .formLogin()
-//                .loginPage("/login")
-                .defaultSuccessUrl("/", false)
+                .loginPage("/login")
+                .loginProcessingUrl("/authentication/form")
+                .successHandler(myAuthenticationSuccessHandler)
+                //.defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout()
@@ -65,7 +70,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/static/**", "/")
                 .permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .csrf().disable();
     }
 
     /**

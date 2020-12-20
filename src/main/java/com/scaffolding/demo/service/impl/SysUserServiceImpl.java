@@ -10,10 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author lidaxia
@@ -38,13 +35,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         String password = new BCryptPasswordEncoder().encode("123");
 //        String password = "";
         if (username.equals("admin")) {
-            SysUser user = new SysUser();
-            user.setId(1L);
-            user.setUserName("admin");
-            /**
-             * 密码为123（通过BCryptPasswordEncoderl加密后的密文）
-             */
-            user.setPassword(password);
+//            SysUser user = new SysUser();
+//            user.setId(1L);
+//            user.setUserName("admin");
+//            /**
+//             * 密码为123（通过BCryptPasswordEncoderl加密后的密文）
+//             */
+//            user.setPassword(password);
+            QueryWrapper<SysUser> queryWrapper = new QueryWrapper();
+            queryWrapper.eq("user_name", username);
+            SysUser user = sysUserMapper.selectOne(queryWrapper);
             List<String> roles = new ArrayList<>();
             roles.add("ROLE_ADMIN");
             roles.add("ROLE_EMPLOYEE");
@@ -92,4 +92,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return map;
     }
 
+    public static void main(String[] args) {
+        System.out.println(new BCryptPasswordEncoder().encode("123"));
+    }
 }

@@ -160,43 +160,42 @@
 
 
 
-    setInterval(function () {
-
-
-        $.post("/Home/AsycData", {}, function (data) {
-            console.log(data);
-            timeData.push(data.timeData);
-            cpuData.push(data.cpuData);
-            memoryData.push(data.memoryData);
-
-            if(timeData.length > 30){
-                timeData.shift();
-                cpuData.shift();
-                memoryData.shift();
-            }
-
-        });
-
-        cpuChart.setOption({
-            xAxis: {
-                data: timeData
-            },
-            series: [{
-                name: '成交',
-                data: cpuData
-            }]
-        });
-
-        memoryChart.setOption({
-            xAxis: {
-                data: timeData
-            },
-            series: [{
-                name: '成交',
-                data: memoryData
-            }]
-        });
-    }, 500);
+    // setInterval(function () {
+    //
+    //     $.post("/Home/AsycData", {}, function (data) {
+    //         console.log(data);
+    //         timeData.push(data.timeData);
+    //         cpuData.push(data.cpuData);
+    //         memoryData.push(data.memoryData);
+    //
+    //         if(timeData.length > 30){
+    //             timeData.shift();
+    //             cpuData.shift();
+    //             memoryData.shift();
+    //         }
+    //
+    //     });
+    //
+    //     cpuChart.setOption({
+    //         xAxis: {
+    //             data: timeData
+    //         },
+    //         series: [{
+    //             name: '成交',
+    //             data: cpuData
+    //         }]
+    //     });
+    //
+    //     memoryChart.setOption({
+    //         xAxis: {
+    //             data: timeData
+    //         },
+    //         series: [{
+    //             name: '成交',
+    //             data: memoryData
+    //         }]
+    //     });
+    // }, 500);
 
     if (cpuOption && typeof cpuOption === "object") {
         cpuChart.setOption(cpuOption, true);

@@ -23,8 +23,8 @@ CREATE TABLE sys_user (
 
 INSERT INTO sys_user (user_name,nick_name,email,phone,`password`,login_date)
 	VALUE
-("1","admin","123@qq.com","13122221111","111111",NOW()),
-("1","admin1","123@qq.com","13122221111","111111",NOW());
+("1","admin","123@qq.com","13122221111","$2a$10$XDw9GvU5x8jBbCtiwxnwjekb3bW/un6L5n41Mbc.WqdtH28WYLKPe",NOW()),
+("1","admin1","123@qq.com","13122221111","$2a$10$XDw9GvU5x8jBbCtiwxnwjekb3bW/un6L5n41Mbc.WqdtH28WYLKPe",NOW());
 
 CREATE TABLE sys_user_role (
 	user_id BIGINT (20) NOT NULL COMMENT '用户ID',
