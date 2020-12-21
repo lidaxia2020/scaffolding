@@ -32,6 +32,10 @@ CREATE TABLE sys_user_role (
 	PRIMARY KEY (user_id, role_id)
 ) ENGINE = INNODB COMMENT = '用户和角色关联表';
 
+insert into sys_user_role(user_id, role_id)
+value (1,1);
+
+
 CREATE TABLE sys_role (
 	id BIGINT (20) NOT NULL auto_increment COMMENT '角色ID',
 	role_name VARCHAR (30) NOT NULL COMMENT '角色名称',
@@ -47,7 +51,7 @@ CREATE TABLE sys_role (
 ) ENGINE = INNODB auto_increment = 1 COMMENT = '角色信息表';
 
 insert into sys_role(id,role_name,status,del_flag)
-value
+value(1,"超级管理员",0，0)；
 
 CREATE TABLE sys_menu (
 	id BIGINT (20) NOT NULL auto_increment COMMENT '菜单ID',
@@ -79,3 +83,6 @@ CREATE TABLE sys_role_menu (
 	menu_id BIGINT (20) NOT NULL COMMENT '菜单ID',
 	PRIMARY KEY (role_id, menu_id)
 ) ENGINE = INNODB COMMENT = '角色和菜单关联表';
+
+insert into  sys_role_menu(role_id,menu_id)
+value (1,1),(1,2),(1,3),(1,4);
