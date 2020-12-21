@@ -1,12 +1,16 @@
 package com.scaffolding.demo.controller;
 
+import com.scaffolding.demo.service.SysMenuService;
 import com.sun.management.OperatingSystemMXBean;
 import lombok.var;
 import org.apache.tomcat.util.security.Escape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,7 +39,35 @@ public class PageController {
     @Autowired
     private MessageSource messageSource;
 
-    static int i = 1;
+    @Autowired
+    private SysMenuService sysMenuService;
+
+    @GetMapping(value = "/")
+    public ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView();
+        //获取菜单列表
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        authentication.getPrincipal();
+
+        List<MenuNode> menus = sysMenuService.getMenusByRoleIds(roleList);
+        List<MenuNode> titles = MenuNode.buildTitle(menus);
+        titles = ApiMenuFilter.build(titles);
+
+
+        modelAndView.addObject("menus", menus);
+        modelAndView.setViewName("/index");
+
+        //获取用户头像
+//        Integer id = ShiroKit.getUser().getId();
+//        User user = userMapper.selectById(id);
+//        String avatar = user.getAvatar();
+//        model.addAttribute("avatar", avatar);
+//        model.addAttribute("shiro",new ShiroKit());
+
+        return modelAndView;
+    }
+
+
 
     @RequestMapping("/Home/AsycData")
     @ResponseBody
@@ -128,12 +160,7 @@ public class PageController {
                 - prevTicks[CentralProcessor.TickType.IDLE.getIndex()];
         long totalCpu = user + nice + cSys + idle + iowait + irq + softirq + steal;
         modelAndView.addObject("systemsAuditing", processor.getLogicalProcessorCount());
-        System.err.println("cpu系统使用率:" + new DecimalFormat("#.##%").format(cSys * 1.0 / totalCpu));
-        System.err.println("cpu用户使用率:" + new DecimalFormat("#.##%").format(user * 1.0 / totalCpu));
-        System.err.println("cpu当前等待率:" + new DecimalFormat("#.##%").format(iowait * 1.0 / totalCpu));
-        System.err.println("cpu当前空闲率:" + new DecimalFormat("#.##%").format(idle * 1.0 / totalCpu));
-        System.err.format("CPU load: %.1f%% (counting ticks)%n", processor.getSystemCpuLoadBetweenTicks() * 100);
-        System.err.format("CPU load: %.1f%% (OS MXBean)%n", processor.getSystemCpuLoad() * 100);
+
 
         // 内存情况
         OperatingSystemMXBean osmxb = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
@@ -275,12 +302,6 @@ public class PageController {
             return ((bytes / 1024) + " KB");
         }
 
-    }
-
-    @RequestMapping("/index")
-    public String index() {
-
-        return "/index";
     }
 
     @RequestMapping("/login")

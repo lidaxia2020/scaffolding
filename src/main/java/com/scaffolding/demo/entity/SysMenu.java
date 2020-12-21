@@ -71,12 +71,6 @@ public class SysMenu {
     private String visible;
 
     /**
-     * 权限标识
-     * isNullAble:1
-     */
-    private String perms;
-
-    /**
      * 菜单图标
      * isNullAble:1,defaultVal:#
      */

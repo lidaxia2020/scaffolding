@@ -134,7 +134,7 @@
 <#--                        </a>-->
 <#--                    </li >-->
                     <li>
-                        <a _href="/sysMenu//admin-menu">
+                        <a _href="/sysMenu/admin-menu">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>菜单管理管理</cite>
                         </a>

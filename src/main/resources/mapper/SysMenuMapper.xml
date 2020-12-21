@@ -3,5 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scaffolding.demo.dao.SysMenuMapper">
 
+    <select id="getMenusByRoleIds">
+        select * from sys_menu me
+        left join (select menu_id from sys_role_menu where role_id in
+        <foreach collection="roleIds" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        ) rm on me.id = rm.menu_id
 
+    </select>
 </mapper>
