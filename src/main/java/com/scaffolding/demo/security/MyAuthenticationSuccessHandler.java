@@ -1,4 +1,4 @@
-package com.scaffolding.demo.config;
+package com.scaffolding.demo.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;

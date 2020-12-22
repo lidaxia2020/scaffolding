@@ -2,6 +2,7 @@ package com.scaffolding.demo.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.scaffolding.demo.entity.SysMenu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ import java.util.List;
  */
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
 
-    List<SysMenu> getMenusByRoleIds(List<Integer> roleIds);
+    List<SysMenu> getMenusByRoleIds(@Param("roleIds") List<Integer> roleIds);
 }

@@ -1,5 +1,6 @@
 package com.scaffolding.demo.controller;
 
+import com.scaffolding.demo.entity.SysMenu;
 import com.scaffolding.demo.service.SysMenuService;
 import com.sun.management.OperatingSystemMXBean;
 import lombok.var;
@@ -27,6 +28,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * @author lidaxia
@@ -49,12 +51,16 @@ public class PageController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         authentication.getPrincipal();
 
-        List<MenuNode> menus = sysMenuService.getMenusByRoleIds(roleList);
-        List<MenuNode> titles = MenuNode.buildTitle(menus);
-        titles = ApiMenuFilter.build(titles);
+        List<SysMenu> menus = sysMenuService.getMenusByRoleIds(Arrays.asList(1));
+        //分组
+        Map<Long, List<SysMenu>> collect = menus.stream().collect(Collectors.groupingBy(SysMenu::getParentId));
+        //树形结构 肯定有一个根部，我的这个根部的就是parentId.euqal("0"),而且只有一个就get（"0"）
+        List<SysMenu> sysMenus = collect.get(0L);
+        SysMenu treeMenuNode = sysMenus.get(0);
+        //拼接数据
+        forEach(collect, treeMenuNode);
 
-
-        modelAndView.addObject("menus", menus);
+        modelAndView.addObject("menus", collect.get(0L));
         modelAndView.setViewName("/index");
 
         //获取用户头像
@@ -67,6 +73,19 @@ public class PageController {
         return modelAndView;
     }
 
+
+    private static void forEach(Map<Long, List<SysMenu>> collect, SysMenu treeMenuNode) {
+        List<SysMenu> treeMenuNodes = collect.get(treeMenuNode.getId());
+        if (collect.get(treeMenuNode.getId()) != null) {
+            //排序
+//            treeMenuNodes.sort((u1, u2) -> u1.getOrderNum().compareTo(u2.getOrderNum()));
+            treeMenuNodes.stream().sorted(Comparator.comparing(SysMenu::getOrderNum)).collect(Collectors.toList());
+            treeMenuNode.setChild(treeMenuNodes);
+            treeMenuNode.getChild().forEach(t -> {
+                forEach(collect, t);
+            });
+        }
+    }
 
 
     @RequestMapping("/Home/AsycData")

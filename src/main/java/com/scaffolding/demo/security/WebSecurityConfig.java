@@ -1,5 +1,6 @@
-package com.scaffolding.demo.config;
+package com.scaffolding.demo.security;
 
+import com.scaffolding.demo.security.MyAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

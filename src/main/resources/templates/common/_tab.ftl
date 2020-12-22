@@ -2,6 +2,27 @@
 <div class="left-nav">
     <div id="side-nav">
         <ul id="nav">
+
+            <#list menus as menu>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont">${menu.icon}</i>
+                        <cite>${menu.menuName}</cite>
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                    <#list menu.child as child>
+                        <li date-refresh="1">
+                            <a _href="${child.path}">
+                                <i class="iconfont">${child.icon}</i>
+                                <cite>${child.menuName}</cite>
+                            </a>
+                        </li >
+                    </#list>
+                    </ul>
+                </li>
+            </#list>
+
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>

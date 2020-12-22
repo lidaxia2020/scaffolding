@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author lidaxia
  * @version 1.0
@@ -20,7 +22,7 @@ public class SysMenu {
      * isNullAble:0
      */
     @TableId(value = "id",type = IdType.AUTO)
-    private Long menuId;
+    private Long id;
 
     /**
      * 菜单名称
@@ -106,4 +108,6 @@ public class SysMenu {
      */
     private String remark;
 
+
+    private List<SysMenu> child;
 }

@@ -23,8 +23,8 @@ CREATE TABLE sys_user (
 
 INSERT INTO sys_user (user_name,nick_name,email,phone,`password`,login_date)
 	VALUE
-("1","admin","123@qq.com","13122221111","$2a$10$XDw9GvU5x8jBbCtiwxnwjekb3bW/un6L5n41Mbc.WqdtH28WYLKPe",NOW()),
-("1","admin1","123@qq.com","13122221111","$2a$10$XDw9GvU5x8jBbCtiwxnwjekb3bW/un6L5n41Mbc.WqdtH28WYLKPe",NOW());
+("admin","admin","123@qq.com","13122221111","$2a$10$XDw9GvU5x8jBbCtiwxnwjekb3bW/un6L5n41Mbc.WqdtH28WYLKPe",NOW()),
+("admin1","admin1","123@qq.com","13122221111","$2a$10$XDw9GvU5x8jBbCtiwxnwjekb3bW/un6L5n41Mbc.WqdtH28WYLKPe",NOW());
 
 CREATE TABLE sys_user_role (
 	user_id BIGINT (20) NOT NULL COMMENT '用户ID',
@@ -50,8 +50,8 @@ CREATE TABLE sys_role (
 	PRIMARY KEY (id)
 ) ENGINE = INNODB auto_increment = 1 COMMENT = '角色信息表';
 
-insert into sys_role(id,role_name,status,del_flag)
-value(1,"超级管理员",0，0)；
+insert into sys_role(id,role_name,role_sort,status,del_flag)
+value(1,"超级管理员",1,0,0);
 
 CREATE TABLE sys_menu (
 	id BIGINT (20) NOT NULL auto_increment COMMENT '菜单ID',
@@ -76,7 +76,9 @@ insert into sys_menu(id,menu_name, parent_id, path,is_frame,menu_type,visible,ic
 value (1,"管理员管理",0,"",0,"M","0","&#xe726;",1),
 (2,"管理员列表",1,"/sysUser/admin-list",0,"M","0","&#xe6a7;",1),
 (3,"角色管理",1,"/sysRole/admin-role",0,"M","0","&#xe6a7;",1),
-(4,"菜单管理管理",1,"/sysMenu/admin-menu",0,"M","0","&#xe6a7;",1);
+(4,"菜单管理管理",1,"/sysMenu/admin-menu",0,"M","0","&#xe6a7;",1),
+(5,"监控管理",0,"",0,"M","0","&#xe726;",1),
+(6,"数据库监控",6,"/druid",0,"M","0","&#xe6a7;",1);
 
 CREATE TABLE sys_role_menu (
 	role_id BIGINT (20) NOT NULL COMMENT '角色ID',
@@ -85,4 +87,4 @@ CREATE TABLE sys_role_menu (
 ) ENGINE = INNODB COMMENT = '角色和菜单关联表';
 
 insert into  sys_role_menu(role_id,menu_id)
-value (1,1),(1,2),(1,3),(1,4);
+value (1,1),(1,2),(1,3),(1,4),(1,5),(1,6);
