@@ -21,12 +21,14 @@ public class SysRoleController {
     @Autowired
     private SysRoleService sysRoleService;
 
+    private static final String PREFIX = "/system/admin";
+
     @RequestMapping("/admin-role")
     public ModelAndView adminRole() {
         List<SysRole> list = sysRoleService.list();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("list", list);
-        modelAndView.setViewName("/admin-role");
+        modelAndView.setViewName(PREFIX + "/admin-role");
 
         return modelAndView;
     }
@@ -34,7 +36,7 @@ public class SysRoleController {
     @RequestMapping("/role-add")
     public String roleAdd() {
 
-        return "/role-add";
+        return PREFIX + "/role-add";
     }
 
 }

@@ -46,7 +46,7 @@
 
                 <tr>
                     <th>Tomcat.版本</th>
-                    <td>1.0.180420</td>
+                    <td>${tomcat}</td>
                 </tr>
                 <tr>
                     <th>JVM.版本</th>

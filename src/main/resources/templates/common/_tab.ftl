@@ -52,35 +52,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe70b;</i>
-                            <cite>会员管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
+                        <a _href="/genetate">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>代码生成</cite>
+
                         </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="xxx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员列表</cite>
-
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="xx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员删除</cite>
-
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="xx.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>等级管理</cite>
-
-                                </a>
-                            </li>
-
-                        </ul>
                     </li>
                 </ul>
             </li>
@@ -230,27 +206,6 @@
                         <a _href="unicode.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>图标对应字体</cite>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe6b4;</i>
-                    <cite>其它页面</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="login.html" target="_blank">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>登录页面</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="error.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>错误页面</cite>
                         </a>
                     </li>
                 </ul>

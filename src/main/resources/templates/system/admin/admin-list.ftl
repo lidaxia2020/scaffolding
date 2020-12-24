@@ -1,4 +1,4 @@
-<#include "./common/_top.ftl">
+<#include "../../common/_top.ftl">
 <link rel="stylesheet" href="${ctxPath}/static/css/page.css">
 
 <body>

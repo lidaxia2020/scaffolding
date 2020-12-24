@@ -1,6 +1,7 @@
 package com.scaffolding.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -108,6 +109,6 @@ public class SysMenu {
      */
     private String remark;
 
-
+    @TableField(exist = false)
     private List<SysMenu> child;
 }

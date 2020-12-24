@@ -24,6 +24,8 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
+    private static final String PREFIX = "/system/admin";
+
     @RequestMapping("/admin-list")
     public ModelAndView adminList(@ModelAttribute SysUserDto sysUserDto) {
         ModelAndView modelAndView = new ModelAndView();
@@ -32,15 +34,15 @@ public class SysUserController {
                 sysUserDto.getEndTime());
         modelAndView.addObject("data", data);
         modelAndView.addObject("sysUserDto", sysUserDto);
-        modelAndView.setViewName("/admin-list");
+        modelAndView.setViewName(PREFIX + "/admin-list");
         return modelAndView;
     }
 
     @RequestMapping("/list")
     public Object list(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int pageSize,
-                                  @RequestParam(required = false) String username,
-                                  @RequestParam(required = false) String startTime,
-                                  @RequestParam(required = false) String endTime) {
+                       @RequestParam(required = false) String username,
+                       @RequestParam(required = false) String startTime,
+                       @RequestParam(required = false) String endTime) {
         return sysUserService.list(page, pageSize,
                 username, startTime,
                 endTime);
@@ -49,7 +51,7 @@ public class SysUserController {
     @RequestMapping("/admin-add")
     public String admin_add() {
 
-        return "/admin-add";
+        return PREFIX + "/admin-add";
     }
 
     @RequestMapping("/admin-edit/{id}")
@@ -58,7 +60,7 @@ public class SysUserController {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("sysUser", sysUser);
-        modelAndView.setViewName("/admin-edit");
+        modelAndView.setViewName(PREFIX + "/admin-edit");
         return modelAndView;
     }
 

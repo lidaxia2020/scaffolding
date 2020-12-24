@@ -1,4 +1,4 @@
-<#include "./common/_top.ftl">
+<#include "../../common/_top.ftl">
 
 <body>
 <div class="x-nav">
@@ -15,30 +15,30 @@
 <div class="x-body">
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so layui-form-pane">
-<#--            <div class="layui-input-inline">-->
-<#--                <select name="cateid">-->
-<#--                    <option>规则分类</option>-->
-<#--                    <option>文章</option>-->
-<#--                    <option>会员</option>-->
-<#--                    <option>权限</option>-->
-<#--                </select>-->
-<#--            </div>-->
-<#--            <div class="layui-input-inline">-->
-<#--                <select name="contrller">-->
-<#--                    <option>请控制器</option>-->
-<#--                    <option>Index</option>-->
-<#--                    <option>Goods</option>-->
-<#--                    <option>Cate</option>-->
-<#--                </select>-->
-<#--            </div>-->
-<#--            <div class="layui-input-inline">-->
-<#--                <select name="action">-->
-<#--                    <option>请方法</option>-->
-<#--                    <option>add</option>-->
-<#--                    <option>login</option>-->
-<#--                    <option>checklogin</option>-->
-<#--                </select>-->
-<#--            </div>-->
+            <#--            <div class="layui-input-inline">-->
+            <#--                <select name="cateid">-->
+            <#--                    <option>规则分类</option>-->
+            <#--                    <option>文章</option>-->
+            <#--                    <option>会员</option>-->
+            <#--                    <option>权限</option>-->
+            <#--                </select>-->
+            <#--            </div>-->
+            <#--            <div class="layui-input-inline">-->
+            <#--                <select name="contrller">-->
+            <#--                    <option>请控制器</option>-->
+            <#--                    <option>Index</option>-->
+            <#--                    <option>Goods</option>-->
+            <#--                    <option>Cate</option>-->
+            <#--                </select>-->
+            <#--            </div>-->
+            <#--            <div class="layui-input-inline">-->
+            <#--                <select name="action">-->
+            <#--                    <option>请方法</option>-->
+            <#--                    <option>add</option>-->
+            <#--                    <option>login</option>-->
+            <#--                    <option>checklogin</option>-->
+            <#--                </select>-->
+            <#--            </div>-->
             <input class="layui-input" placeholder="权限名" name="cate_name">
             <button class="layui-btn" lay-submit="" lay-filter="sreach" type="submit"><i
                         class="layui-icon">&#xe615;</i></button>
@@ -55,49 +55,42 @@
         <tr>
             <th>
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i
-                        class="layui-icon">&#xe605;</i></div>
+                            class="layui-icon">&#xe605;</i></div>
             </th>
             <th>ID</th>
             <th>菜单名称</th>
             <th>父菜单ID</th>
             <th>路由地址</th>
             <th>是否为外链（0是 1否）</th>
-            <th>菜单状态</th>
+            <th>备注</th>
             <th>操作</th>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i>
-                </div>
-            </td>
-            <td>1</td>
-            <td>admin/user/userlist</td>
-            <td>会员列表</td>
-            <td>会员相关</td>
-            <td>admin/user/userlist</td>
-            <td>会员列表</td>
-            <td class="td-manage">
-                <a title="编辑" onclick="x_admin_show('编辑','xxx.html')" href="javascript:;">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
+        <#list list as item>
+            <tr>
+                <td>
+                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i
+                                class="layui-icon">&#xe605;</i>
+                    </div>
+                </td>
+                <td>${item.id}</td>
+                <td>${item.menuName}</td>
+                <td>${item.parentId}</td>
+                <td>${item.path}</td>
+                <td>${item.isFrame}</td>
+                <td>${item.remark}</td>
+                <td class="td-manage">
+                    <a title="编辑" onclick="x_admin_show('编辑','xxx.html')" href="javascript:;">
+                        <i class="layui-icon">&#xe642;</i>
+                    </a>
+                    <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                        <i class="layui-icon">&#xe640;</i>
+                    </a>
+                </td>
+            </tr>
+        </#list>
         </tbody>
     </table>
-<#--    <div class="page">-->
-<#--        <div>-->
-<#--            <a class="prev" href="">&lt;&lt;</a>-->
-<#--            <a class="num" href="">1</a>-->
-<#--            <span class="current">2</span>-->
-<#--            <a class="num" href="">3</a>-->
-<#--            <a class="num" href="">489</a>-->
-<#--            <a class="next" href="">&gt;&gt;</a>-->
-<#--        </div>-->
-<#--    </div>-->
 
 </div>
 <script>
@@ -162,12 +155,12 @@
     }
 </script>
 <script>var _hmt = _hmt || [];
-(function () {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-})();</script>
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();</script>
 </body>
 
 </html>

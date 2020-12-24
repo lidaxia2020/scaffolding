@@ -15,36 +15,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author lijiannan
+ * @author lidaxia
  * @version 1.0
  * @date 2020/12/22 17:48
  */
 @Configuration
 public class DruidConfig {
 
-    @ConfigurationProperties(prefix = "spring.datasource")
-    @Bean
-    public DataSource druid() {
-        return new DruidDataSource();
-    }
 
-    // 配置Druid的监控
-    // 1、配置一个管理后台的Servlet
-//    @Bean
-//    public ServletRegistrationBean statViewServlet() {
-//        ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
-//        Map<String, String> initParams = new HashMap<>();
-//
-//        initParams.put("loginUsername", "admin");
-//        initParams.put("loginPassword", "123456");
-//        initParams.put("allow", "");// 默认就是允许所有访问
-//        initParams.put("deny", "");
-//
-//        bean.setInitParameters(initParams);
-//        return bean;
-//    }
-
-    // 2、配置一个web监控的filter
+    /**
+     * 配置一个web监控的filter
+     * @return
+     */
     @Bean
     public FilterRegistrationBean webStatFilter() {
         FilterRegistrationBean bean = new FilterRegistrationBean();

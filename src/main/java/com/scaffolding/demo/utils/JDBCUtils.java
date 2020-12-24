@@ -1,32 +1,34 @@
 package com.scaffolding.demo.utils;
 
+import com.scaffolding.demo.dto.Db;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * @author lijiannan
+ * @author lidaxia
  * @version 1.0
  * @date 2020/12/18 16:30
  */
 public class JDBCUtils {
 
+
     /**
      * 获取连接
-     * @param driver
-     * @param url
-     * @param username
-     * @param pwd
+     *
+     * @param db
      * @return
      */
-    public static Connection getConnection(String driver, String url, String username, String pwd) {
+    public static Connection init(Db db) {
         try {
-            Class.forName(driver);
-            return DriverManager.getConnection(url, username, pwd);
+            Class.forName(db.getDriver());
+            return DriverManager.getConnection(db.getUrl(), db.getUsername(), db.getPwd());
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return null;
     }
 
 

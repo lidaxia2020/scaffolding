@@ -14,6 +14,12 @@
     <script type="text/javascript" src="${ctxPath}/static/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="${ctxPath}/static/js/xadmin.js"></script>
     <script type="text/javascript" src="${ctxPath}/static/js/cookie.js"></script>
+    <!-- 登录页面嵌套在iframe -->
+    <script>
+        if (window.top !== window.self) {
+            window.top.location = window.location;
+        }
+    </script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>

@@ -4,6 +4,7 @@ import com.scaffolding.demo.entity.SysMenu;
 import com.scaffolding.demo.service.SysMenuService;
 import com.sun.management.OperatingSystemMXBean;
 import lombok.var;
+import org.apache.catalina.util.ServerInfo;
 import org.apache.tomcat.util.security.Escape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -38,6 +39,8 @@ import java.util.stream.Collectors;
 @Controller
 public class PageController {
 
+    private static final String PREFIX = "/system";
+
     @Autowired
     private MessageSource messageSource;
 
@@ -56,11 +59,16 @@ public class PageController {
         Map<Long, List<SysMenu>> collect = menus.stream().collect(Collectors.groupingBy(SysMenu::getParentId));
         //树形结构 肯定有一个根部，我的这个根部的就是parentId.euqal("0"),而且只有一个就get（"0"）
         List<SysMenu> sysMenus = collect.get(0L);
-        SysMenu treeMenuNode = sysMenus.get(0);
-        //拼接数据
-        forEach(collect, treeMenuNode);
 
-        modelAndView.addObject("menus", collect.get(0L));
+        for (SysMenu sysMenu : sysMenus) {
+            sysMenu.setChild(collect.get(sysMenu.getId()));
+        }
+
+//        SysMenu treeMenuNode = sysMenus.get(0);
+//        //拼接数据
+//        forEach(collect, treeMenuNode);
+
+        modelAndView.addObject("menus", sysMenus);
         modelAndView.setViewName("/index");
 
         //获取用户头像
@@ -74,17 +82,26 @@ public class PageController {
     }
 
 
-    private static void forEach(Map<Long, List<SysMenu>> collect, SysMenu treeMenuNode) {
-        List<SysMenu> treeMenuNodes = collect.get(treeMenuNode.getId());
-        if (collect.get(treeMenuNode.getId()) != null) {
-            //排序
-//            treeMenuNodes.sort((u1, u2) -> u1.getOrderNum().compareTo(u2.getOrderNum()));
-            treeMenuNodes.stream().sorted(Comparator.comparing(SysMenu::getOrderNum)).collect(Collectors.toList());
-            treeMenuNode.setChild(treeMenuNodes);
-            treeMenuNode.getChild().forEach(t -> {
-                forEach(collect, t);
-            });
-        }
+    @GetMapping(value = "/genetate")
+    public ModelAndView genetate() {
+        ModelAndView modelAndView = new ModelAndView();
+
+       // modelAndView.setViewName(PREFIX + "system/genetate");
+        modelAndView.addObject("list", new ArrayList<>());
+        modelAndView.setViewName( "/system.genetate/genetate");
+
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/genetateConfig")
+    public ModelAndView genetateConfig() {
+        ModelAndView modelAndView = new ModelAndView();
+
+        // modelAndView.setViewName(PREFIX + "system/genetate");
+        modelAndView.addObject("list", new ArrayList<>());
+        modelAndView.setViewName( "/system.genetate/genetate");
+
+        return modelAndView;
     }
 
 
@@ -145,6 +162,8 @@ public class PageController {
         modelAndView.addObject("osName", System.getProperty("os.name"));
         modelAndView.addObject("osVersion", System.getProperty("os.version"));
         modelAndView.addObject("osArch", System.getProperty("os.arch"));
+        modelAndView.addObject("tomcat", ServerInfo.getServerInfo());
+
         try {
             InetAddress address = InetAddress.getLocalHost();
             modelAndView.addObject("hostName", address.getHostName());
@@ -203,10 +222,6 @@ public class PageController {
         return modelAndView;
     }
 
-    public static void main(String[] args) {
-        System.out.println("args = " + formatSize(
-                Long.valueOf(Runtime.getRuntime().freeMemory()), true));
-    }
 
     public static void writeVMState(PrintWriter writer, int mode, Object[] args)
             throws Exception {

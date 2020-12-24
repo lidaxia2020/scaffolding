@@ -1,4 +1,4 @@
-<#include "./common/_top.ftl">
+<#include "../../common/_top.ftl">
 
 <body>
 <div class="x-nav">

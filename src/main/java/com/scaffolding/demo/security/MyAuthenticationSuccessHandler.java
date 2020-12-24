@@ -45,7 +45,8 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(objectMapper.writeValueAsString(authentication));
         } else {
-            super.onAuthenticationSuccess(request, response, authentication);
+            //super.onAuthenticationSuccess(request, response, authentication);
+            response.sendRedirect("/");
         }
 
     }
