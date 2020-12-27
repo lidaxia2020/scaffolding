@@ -5,20 +5,21 @@ import com.scaffolding.demo.dto.ConfigDto;
 import com.scaffolding.demo.dto.Db;
 import com.scaffolding.demo.dto.GenerateCodeDto;
 import com.scaffolding.demo.entity.TableClass;
+import com.scaffolding.demo.result.RestResult;
 import com.scaffolding.demo.service.GenerateCodeService;
 import com.scaffolding.demo.utils.JDBCUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lidaxia
@@ -30,22 +31,43 @@ import java.util.List;
 public class GenerateCodeController {
     @Autowired
     GenerateCodeService generateCodeService;
+    private String packageName;
 
 
     @PostMapping("/connect")
-    public void connect(@RequestBody Db db) {
+    @ResponseBody
+    public RestResult connect(@RequestBody Db db) {
         Connection con = JDBCUtils.init(db);
         if (con != null) {
-//            return RespBean.ok("数据库连接成功");
+            return RestResult.sucMes("数据库连接成功");
         }
-//        return RespBean.error("数据库连接失败");
+        return RestResult.failMes("数据库连接失败");
+    }
+
+
+    @GetMapping("/config")
+    @ResponseBody
+    public RestResult configGet(@RequestParam String url,
+                                @RequestParam String username,
+                                @RequestParam String pwd,
+                                @RequestParam String packageName) {
+
+        ConfigDto configDto = new ConfigDto();
+        configDto.setPwd(pwd);
+        configDto.setUrl(url);
+        configDto.setUsername(username);
+        configDto.setPackageName(packageName);
+
+        return config(configDto);
     }
 
     @PostMapping("/config")
-    public Object config(@RequestBody ConfigDto configDto) {
+    @ResponseBody
+    public RestResult config(@RequestBody ConfigDto configDto) {
+
         String packageName = configDto.getPackageName();
         try {
-            Connection connection = JDBCUtils.init(new Db(configDto.getDriver(), configDto.getUrl(), configDto.getPackageName(), configDto.getPwd()));
+            Connection connection = JDBCUtils.init(new Db(configDto.getDriver(), configDto.getUrl(), configDto.getUsername(), configDto.getPwd()));
             DatabaseMetaData metaData = connection.getMetaData();
             ResultSet tables = metaData.getTables(connection.getCatalog(), null, null, null);
             List<TableClass> tableClassList = new ArrayList<>();
@@ -61,7 +83,8 @@ public class GenerateCodeController {
                 tableClass.setServiceName(modelName + "Service");
                 tableClassList.add(tableClass);
             }
-            return tableClassList;
+
+            return RestResult.suc(tableClassList);
         } catch (Exception e) {
             e.printStackTrace();
         }

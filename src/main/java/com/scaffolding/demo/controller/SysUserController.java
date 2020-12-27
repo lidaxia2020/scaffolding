@@ -4,7 +4,6 @@ import com.scaffolding.demo.dto.SysUserDto;
 import com.scaffolding.demo.entity.SysUser;
 import com.scaffolding.demo.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,14 +64,14 @@ public class SysUserController {
     }
 
 
-    @RequestMapping("/add")
-    @ResponseBody
-    public void add(@RequestBody SysUser sysUser) {
-
-        String password = new BCryptPasswordEncoder().encode(sysUser.getPassword());
-        sysUser.setPassword(password);
-        sysUserService.save(sysUser);
-    }
+//    @RequestMapping("/add")
+//    @ResponseBody
+//    public void add(@RequestBody SysUser sysUser) {
+//
+//        String password = new BCryptPasswordEncoder().encode(sysUser.getPassword());
+//        sysUser.setPassword(password);
+//        sysUserService.save(sysUser);
+//    }
 
     @RequestMapping("/delete")
     @ResponseBody

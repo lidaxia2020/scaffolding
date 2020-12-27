@@ -27,10 +27,10 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
     private ObjectMapper objectMapper;
 
 
-    /*
+    /**
      * (non-Javadoc)
      *
-     * @see org.springframework.security.web.authentication.
+     * @see org.springframework.security.web.authentication
      * AuthenticationSuccessHandler#onAuthenticationSuccess(javax.servlet.http.
      * HttpServletRequest, javax.servlet.http.HttpServletResponse,
      * org.springframework.security.core.Authentication)

@@ -3,14 +3,11 @@ package com.scaffolding.demo.controller;
 import com.scaffolding.demo.entity.SysMenu;
 import com.scaffolding.demo.service.SysMenuService;
 import com.sun.management.OperatingSystemMXBean;
-import lombok.var;
 import org.apache.catalina.util.ServerInfo;
 import org.apache.tomcat.util.security.Escape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,8 +48,8 @@ public class PageController {
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
         //获取菜单列表
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        authentication.getPrincipal();
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        authentication.getPrincipal();
 
         List<SysMenu> menus = sysMenuService.getMenusByRoleIds(Arrays.asList(1));
         //分组
@@ -88,7 +85,7 @@ public class PageController {
 
        // modelAndView.setViewName(PREFIX + "system/genetate");
         modelAndView.addObject("list", new ArrayList<>());
-        modelAndView.setViewName( "/system.genetate/genetate");
+        modelAndView.setViewName( "/system/genetate/genetate");
 
         return modelAndView;
     }

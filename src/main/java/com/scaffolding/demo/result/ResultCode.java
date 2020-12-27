@@ -7,6 +7,9 @@ package com.scaffolding.demo.result;
  */
 public enum ResultCode {
 
+    SUC(0, "成功"),
+    FAILED(-1, "失败"),
+
     /**
      * token相关
      */

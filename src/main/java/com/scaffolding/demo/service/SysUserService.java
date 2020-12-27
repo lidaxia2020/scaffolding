@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface SysUserService extends IService<SysUser> {
 
-    SysUser getAuthUserByUsername(String username);
+   SysUser getAuthUserByUsername(String username);
 
     /**
      * 获取页面列表

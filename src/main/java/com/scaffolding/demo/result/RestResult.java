@@ -11,11 +11,25 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RestResult<T> {
+
+
+    public static RestResult suc(Object data) {
+        return new RestResult(ResultCode.SUC, data);
+    }
+
+    public static RestResult sucMes(String message) {
+        return new RestResult(ResultCode.SUC.getCode(), message);
+    }
+
+    public static RestResult failMes(String message) {
+        return new RestResult(ResultCode.FAILED.getCode(), message);
+    }
+
     private int code;
 
     private String message;
 
-    private  T data;
+    private T data;
 
     public int getCode() {
         return code;
@@ -24,48 +38,25 @@ public class RestResult<T> {
     public RestResult() {
     }
 
-    public RestResult(ResultCode resultCode){
+    public RestResult(ResultCode resultCode) {
         this.code = resultCode.getCode();
         this.message = resultCode.getMessage();
     }
 
-    public RestResult(Integer code, String  message){
+    public RestResult(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public RestResult(Integer code, String message, T data){
+    public RestResult(Integer code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public RestResult(ResultCode resultCode, T data){
+    public RestResult(ResultCode resultCode, T data) {
         this(resultCode);
         this.data = data;
-    }
-
-    public RestResult setCode(int code) {
-        this.code = code;
-        return this;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public RestResult setMessage(String message) {
-        this.message = message;
-        return this;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public RestResult setData(T data) {
-        this.data = data;
-        return this;
     }
 
 
