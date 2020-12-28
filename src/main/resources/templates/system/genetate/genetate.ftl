@@ -27,12 +27,12 @@
             <span style="line-height:40px">数据库密码 ：</span>
             <input class="layui-input" placeholder="123" name="pwd" id="pwd" value="${sysUserDto.endTime}" />
 
-            <button class="layui-btn" lay-submit="" lay-filter="sreach" onclick="connect()">连接数据库</button>
+            <button class="layui-btn" lay-submit="" lay-filter="sreach" onclick="connect()">测试数据库连接</button>
         </span>
         <span class="layui-form layui-col-md12 x-so">
             <span style="line-height:40px">包名：</span>
             <input class="layui-input" placeholder="org.gene.test" name="packageName" id="packageName" value="${sysUserDto.startTime}" />
-            <button class="layui-btn layui-btn-disabled" onclick="config()"><i class="layui-icon"></i>配置</button>
+            <button class="layui-btn " onclick="config()"><i class="layui-icon"></i>配置</button>
         </span>
 
     </div>
@@ -45,7 +45,7 @@
 
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量生成</button>
+        <button class="layui-btn layui-btn-normal layui-btn-radius" onclick="addAll()">批量生成</button>
     </div>
 </script>
 

@@ -65,7 +65,6 @@ public class GenerateCodeController {
     @ResponseBody
     public RestResult config(@RequestBody ConfigDto configDto) {
 
-        String packageName = configDto.getPackageName();
         try {
             Connection connection = JDBCUtils.init(new Db(configDto.getDriver(), configDto.getUrl(), configDto.getUsername(), configDto.getPwd()));
             DatabaseMetaData metaData = connection.getMetaData();
@@ -73,10 +72,9 @@ public class GenerateCodeController {
             List<TableClass> tableClassList = new ArrayList<>();
             while (tables.next()) {
                 TableClass tableClass = new TableClass();
-                tableClass.setPackageName(packageName);
-                String table_name = tables.getString("TABLE_NAME");
-                String modelName = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, table_name);
-                tableClass.setTableName(table_name);
+                String tableName = tables.getString("TABLE_NAME");
+                String modelName = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName);
+                tableClass.setTableName(tableName);
                 tableClass.setModelName(modelName);
                 tableClass.setControllerName(modelName + "Controller");
                 tableClass.setMapperName(modelName + "Mapper");

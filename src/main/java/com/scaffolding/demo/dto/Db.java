@@ -28,4 +28,6 @@ public class Db {
     private String username;
 
     private String pwd;
+
+    private String packageName;
 }

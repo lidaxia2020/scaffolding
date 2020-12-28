@@ -17,7 +17,6 @@ public class TableClass {
     private String serviceName;
     private String mapperName;
     private String controllerName;
-    private String packageName;
     private List<ColumnClass> columns;
 
 
