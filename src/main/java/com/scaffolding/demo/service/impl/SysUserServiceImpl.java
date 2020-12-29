@@ -2,7 +2,7 @@ package com.scaffolding.demo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.scaffolding.demo.dao.SysUserMapper;
+import com.scaffolding.demo.mapper.SysUserMapper;
 import com.scaffolding.demo.entity.SysUser;
 import com.scaffolding.demo.service.SysUserService;
 import com.scaffolding.demo.utils.PageUtils;

@@ -15,8 +15,10 @@ public class TableClass {
     private String tableName;
     private String modelName;
     private String serviceName;
+    private String serviceNameImpl;
     private String mapperName;
     private String controllerName;
+    private String packageName;
     private List<ColumnClass> columns;
 
 

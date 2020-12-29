@@ -1,6 +1,7 @@
 package com.scaffolding.demo.service;
 
 import com.scaffolding.demo.dto.GenerateCodeDto;
+import com.scaffolding.demo.result.RestResult;
 
 
 /**
@@ -10,6 +11,6 @@ import com.scaffolding.demo.dto.GenerateCodeDto;
  */
 public interface GenerateCodeService {
 
-    void generateCode(GenerateCodeDto generateCodeDto, String realPath);
+    RestResult generateCode(GenerateCodeDto generateCodeDto, String realPath);
 
 }

@@ -1,7 +1,7 @@
 package com.scaffolding.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.scaffolding.demo.dao.SysRoleMapper;
+import com.scaffolding.demo.mapper.SysRoleMapper;
 import com.scaffolding.demo.entity.SysRole;
 import com.scaffolding.demo.service.SysRoleService;
 import org.springframework.stereotype.Service;

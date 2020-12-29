@@ -160,6 +160,89 @@ config = function () {
 }
 
 addAll = function () {
+
+    var url1 = $('#url').val();
+    var username = $('#username').val();
+    var pwd = $('#pwd').val();
+    var packageName = $('#packageName').val();
+
+
+    if (!url1.trim()) {
+        layer.alert("url 不能为空");
+        return false;
+    }
+
+    if (!username.trim()) {
+        layer.alert("数据库用户名 不能为空");
+        return false;
+    }
+    if (!pwd.trim()) {
+        layer.alert("数据库密码 不能为空");
+        return false;
+    }
+    if (!packageName.trim()) {
+        layer.alert("包名 不能为空");
+        return false;
+    }
+
+    var url = 'jdbc:mysql://' + url1 + '?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai';
+
+    var data = {
+        url: url,
+        username: username,
+        pwd: pwd,
+        packageName: packageName
+    }
+
+
     var selectData = layui.table.checkStatus('generate').data;
-    console.log(selectData);
+
+    var tableClassList = [];
+    for (var i = 0; i < selectData.length; i++) {
+        var item = {
+            tableName: selectData[i].tableName,
+            modelName: selectData[i].modelName,
+            serviceName: selectData[i].serviceName,
+            mapperName: selectData[i].mapperName,
+            controllerName: selectData[i].controllerName
+        }
+
+        tableClassList.push(item)
+    }
+
+    var data = {
+        db: {
+            url: url,
+            username: username,
+            pwd: pwd,
+            packageName: packageName
+        },
+        tableClassList: tableClassList
+
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/generateCode/generateCode",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (data) {
+            if (data.code === 0) {
+                layer.alert(data.message, {icon: 1, time: 1000});
+            } else {
+                layer.alert(data.message, {icon: 2, time: 1000});
+            }
+        },
+        error: function (jqXHR) {
+            layer.alert("发生错误：" + jqXHR.status, {icon: 2, time: 1000});
+        }
+    });
+}
+
+
+downlist = function () {
+    layer.open({
+        title: '下载管理'
+        ,content: '可以填写任意的layer代码'
+    });
 }

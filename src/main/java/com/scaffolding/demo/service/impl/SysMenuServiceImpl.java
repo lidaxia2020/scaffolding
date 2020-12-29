@@ -1,7 +1,7 @@
 package com.scaffolding.demo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.scaffolding.demo.dao.SysMenuMapper;
+import com.scaffolding.demo.mapper.SysMenuMapper;
 import com.scaffolding.demo.entity.SysMenu;
 import com.scaffolding.demo.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;

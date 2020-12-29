@@ -1,10 +1,9 @@
-package com.scaffolding.demo.dao;
+package com.scaffolding.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.scaffolding.demo.entity.SysUser;
 import org.apache.ibatis.annotations.Param;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

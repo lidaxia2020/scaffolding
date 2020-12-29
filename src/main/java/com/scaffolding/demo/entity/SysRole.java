@@ -22,7 +22,7 @@ public class SysRole {
      * isNullAble:0
      */
     @TableId(value = "id",type = IdType.AUTO)
-    private Long roleId;
+    private Long id;
 
     /**
      * 角色名称

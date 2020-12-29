@@ -9,7 +9,5 @@
         </#list>
     </resultMap>
 
-    <select id="getAll${modelName}s" resultMap="BaseResultMap">
-        select * from ${tableName};
-    </select>
+
 </mapper>

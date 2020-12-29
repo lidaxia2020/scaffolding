@@ -6,5 +6,6 @@ import java.util.List;
 
 @Mapper
 public interface ${mapperName}{
-    List<${modelName}> getAll${modelName}s();
+
+
 }

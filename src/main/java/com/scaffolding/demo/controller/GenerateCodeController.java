@@ -9,6 +9,7 @@ import com.scaffolding.demo.result.RestResult;
 import com.scaffolding.demo.service.GenerateCodeService;
 import com.scaffolding.demo.utils.JDBCUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +18,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author lidaxia
@@ -31,7 +30,9 @@ import java.util.Map;
 public class GenerateCodeController {
     @Autowired
     GenerateCodeService generateCodeService;
-    private String packageName;
+
+    @Value("${generate.path}")
+    private String path;
 
 
     @PostMapping("/connect")
@@ -79,6 +80,7 @@ public class GenerateCodeController {
                 tableClass.setControllerName(modelName + "Controller");
                 tableClass.setMapperName(modelName + "Mapper");
                 tableClass.setServiceName(modelName + "Service");
+                tableClass.setServiceNameImpl(modelName + "ServiceImpl");
                 tableClassList.add(tableClass);
             }
 
@@ -86,12 +88,13 @@ public class GenerateCodeController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return RestResult.failMes("设置失败");
     }
 
 
     @PostMapping("/generateCode")
-    public void generateCode(@RequestBody GenerateCodeDto generateCodeDto, HttpServletRequest req) {
-        generateCodeService.generateCode(generateCodeDto, req.getServletContext().getRealPath("/"));
+    @ResponseBody
+    public RestResult generateCode(@RequestBody GenerateCodeDto generateCodeDto) {
+        return generateCodeService.generateCode(generateCodeDto, path);
     }
 }

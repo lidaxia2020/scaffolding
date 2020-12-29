@@ -21,7 +21,7 @@ CREATE TABLE sys_user (
 	PRIMARY KEY (id)
 ) ENGINE = INNODB auto_increment = 1 COMMENT = '用户信息表';
 
-INSERT INTO sys_user (user_name,nick_name,email,phone,`password`,login_date)
+INSERT INTO sys_user(user_name,nick_name,email,phone,`password`,login_date)
 	VALUE
 ("admin","admin","123@qq.com","13122221111","$2a$10$XDw9GvU5x8jBbCtiwxnwjekb3bW/un6L5n41Mbc.WqdtH28WYLKPe",NOW()),
 ("admin1","admin1","123@qq.com","13122221111","$2a$10$XDw9GvU5x8jBbCtiwxnwjekb3bW/un6L5n41Mbc.WqdtH28WYLKPe",NOW());
@@ -78,7 +78,9 @@ value (1,"管理员管理",0,"",0,"M","0","&#xe726;",1),
 (3,"角色管理",1,"/sysRole/admin-role",0,"M","0","&#xe6a7;",1),
 (4,"菜单管理管理",1,"/sysMenu/admin-menu",0,"M","0","&#xe6a7;",1),
 (5,"监控管理",0,"",0,"M","0","&#xe726;",1),
-(6,"数据库监控",6,"/druid",0,"M","0","&#xe6a7;",1);
+(6,"数据库监控",6,"/druid",0,"M","0","&#xe6a7;",1),
+(7,"开发辅助管理",0,"",0,"M","0","&#xe726;",1),
+(8,"java代码生成",7,"/genetate",0,"M","0","&#xe6a7;",1);
 
 CREATE TABLE sys_role_menu (
 	role_id BIGINT (20) NOT NULL COMMENT '角色ID',
@@ -87,4 +89,17 @@ CREATE TABLE sys_role_menu (
 ) ENGINE = INNODB COMMENT = '角色和菜单关联表';
 
 insert into  sys_role_menu(role_id,menu_id)
-value (1,1),(1,2),(1,3),(1,4),(1,5),(1,6);
+value (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8);
+
+
+CREATE TABLE file_down (
+	id BIGINT (20) NOT NULL auto_increment COMMENT '菜单ID',
+	package_name VARCHAR (128) NOT NULL COMMENT '包名',
+	create_by VARCHAR (64) DEFAULT '' COMMENT '创建者',
+	create_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	update_by VARCHAR (64) DEFAULT '' COMMENT '更新者',
+	update_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+	PRIMARY KEY (id)
+) ENGINE = INNODB auto_increment = 1 COMMENT = '代码生成管理';
+
+

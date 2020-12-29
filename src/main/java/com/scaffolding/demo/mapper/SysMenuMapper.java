@@ -1,4 +1,4 @@
-package com.scaffolding.demo.dao;
+package com.scaffolding.demo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.scaffolding.demo.entity.SysMenu;

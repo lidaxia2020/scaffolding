@@ -40,12 +40,12 @@
                                 class="layui-icon">&#xe605;</i>
                     </div>
                 </td>
-                <td>${item.id}<</td>
+                <td>${item.id}</td>
                 <td>${item.roleName}</td>
                 <td>${item.status}</td>
                 <td>${item.remark}</td>
                 <td class="td-manage">
-                    <a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">
+                    <a onclick="member_stop(this,${item.id})" href="javascript:;" title="启用">
                         <i class="layui-icon">&#xe601;</i>
                     </a>
                     <a title="编辑" onclick="x_admin_show('编辑','role-add.html')" href="javascript:;">
@@ -122,13 +122,7 @@
         });
     }
 </script>
-<script>var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();</script>
+
 </body>
 
 </html>

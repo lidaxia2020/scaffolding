@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //@EnableWebSecurity
-@MapperScan("com.scaffolding.demo.dao")
+@MapperScan("com.scaffolding.demo.mapper")
 @SpringBootApplication
 public class  ScaffoldingApplication {
 

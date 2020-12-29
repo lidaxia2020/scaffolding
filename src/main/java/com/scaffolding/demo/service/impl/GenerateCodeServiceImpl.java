@@ -4,6 +4,7 @@ import com.google.common.base.CaseFormat;
 import com.scaffolding.demo.dto.GenerateCodeDto;
 import com.scaffolding.demo.entity.ColumnClass;
 import com.scaffolding.demo.entity.TableClass;
+import com.scaffolding.demo.result.RestResult;
 import com.scaffolding.demo.service.GenerateCodeService;
 import com.scaffolding.demo.utils.JDBCUtils;
 import freemarker.cache.ClassTemplateLoader;
@@ -35,17 +36,18 @@ public class GenerateCodeServiceImpl implements GenerateCodeService {
 
     {
         cfg = new Configuration(Configuration.VERSION_2_3_29);
-        cfg.setTemplateLoader(new ClassTemplateLoader(GenerateCodeServiceImpl.class, "/templates/system/generate/model"));
+        cfg.setTemplateLoader(new ClassTemplateLoader(GenerateCodeServiceImpl.class, "/templates/system/genetate/mode"));
         cfg.setDefaultEncoding("UTF-8");
     }
 
     @Override
-    public void generateCode(GenerateCodeDto generateCodeDto, String realPath) {
+    public RestResult generateCode(GenerateCodeDto generateCodeDto, String realPath) {
         try {
             Template modelTemplate = cfg.getTemplate("Model.java.ftl");
             Template mapperJavaTemplate = cfg.getTemplate("Mapper.java.ftl");
             Template mapperXmlTemplate = cfg.getTemplate("Mapper.xml.ftl");
             Template serviceTemplate = cfg.getTemplate("Service.java.ftl");
+            Template serviceImplTemplate = cfg.getTemplate("ServiceImpl.java.ftl");
             Template controllerTemplate = cfg.getTemplate("Controller.java.ftl");
             Connection connection = JDBCUtils.init(generateCodeDto.getDb());
             DatabaseMetaData metaData = connection.getMetaData();
@@ -72,18 +74,20 @@ public class GenerateCodeServiceImpl implements GenerateCodeService {
                     columnClassList.add(columnClass);
                 }
                 tableClass.setColumns(columnClassList);
+                tableClass.setPackageName(generateCodeDto.getDb().getPackageName());
                 String path = realPath + "/" + tableClass.getPackageName().replace(".", "/");
                 generate(modelTemplate, tableClass, path + "/model/");
                 generate(mapperJavaTemplate, tableClass, path + "/mapper/");
                 generate(mapperXmlTemplate, tableClass, path + "/mapper/");
                 generate(serviceTemplate, tableClass, path + "/service/");
+                generate(serviceImplTemplate, tableClass, path + "/service/impl/");
                 generate(controllerTemplate, tableClass, path + "/controller/");
             }
-            //return RespBean.ok("代码已生成", realPath);
+            return RestResult.suc("代码已生成");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //return RespBean.error("代码生成失败");
+        return RestResult.failMes("代码生成错误");
 
     }
 
