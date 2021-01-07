@@ -51,21 +51,11 @@ public class PageController {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        authentication.getPrincipal();
 
-        List<SysMenu> menus = sysMenuService.getMenusByRoleIds(Arrays.asList(1));
-        //分组
-        Map<Long, List<SysMenu>> collect = menus.stream().collect(Collectors.groupingBy(SysMenu::getParentId));
-        //树形结构 肯定有一个根部，我的这个根部的就是parentId.euqal("0"),而且只有一个就get（"0"）
-        List<SysMenu> sysMenus = collect.get(0L);
-
-        for (SysMenu sysMenu : sysMenus) {
-            sysMenu.setChild(collect.get(sysMenu.getId()));
-        }
-
 //        SysMenu treeMenuNode = sysMenus.get(0);
 //        //拼接数据
 //        forEach(collect, treeMenuNode);
 
-        modelAndView.addObject("menus", sysMenus);
+        modelAndView.addObject("menus", sysMenuService.getMenus(Arrays.asList(1)));
         modelAndView.setViewName("/index");
 
         //获取用户头像

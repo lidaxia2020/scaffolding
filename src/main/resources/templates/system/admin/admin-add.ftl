@@ -45,17 +45,17 @@
         <div class="layui-form-item">
             <label class="layui-form-label"><span class="x-red">*</span>性别</label>
             <div class="layui-input-block">
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="未知" value="2" checked="">
-                <input type="checkbox" name="like1[read]" lay-skin="primary" title="男" value="0">
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="女" value="1" checked="">
+                <input type="radio" name="sex" lay-skin="primary" title="未知" value="2" checked="">
+                <input type="radio" name="sex" lay-skin="primary" title="男" value="0">
+                <input type="radio" name="sex" lay-skin="primary" title="女" value="1" >
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label"><span class="x-red">*</span>角色</label>
             <div class="layui-input-block">
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="超级管理员" checked="">
-                <input type="checkbox" name="like1[read]" lay-skin="primary" title="编辑人员">
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="宣传人员" checked="">
+                <input type="radio" name="like1[write]" lay-skin="primary" title="超级管理员" checked="">
+                <input type="radio" name="like1[read]" lay-skin="primary" title="编辑人员">
+                <input type="radio" name="like1[write]" lay-skin="primary" title="宣传人员" checked="">
             </div>
         </div>
         <div class="layui-form-item">

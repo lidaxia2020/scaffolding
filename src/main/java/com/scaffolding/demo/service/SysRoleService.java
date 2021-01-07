@@ -1,6 +1,7 @@
 package com.scaffolding.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.scaffolding.demo.dto.RoleAddDto;
 import com.scaffolding.demo.entity.SysRole;
 
 /**
@@ -9,4 +10,8 @@ import com.scaffolding.demo.entity.SysRole;
  * @date 2020/12/17 17:26
  */
 public interface SysRoleService  extends IService<SysRole> {
+
+
+    void roleAdd(RoleAddDto roleAddDto);
+
 }

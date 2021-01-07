@@ -18,40 +18,24 @@
             </label>
             <table class="layui-table layui-input-block">
                 <tbody>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="like1[write]" lay-skin="primary" lay-filter="father" title="用户管理">
-                    </td>
-                    <td>
-                        <div class="layui-input-block">
-                            <input name="id[]" lay-skin="primary" type="checkbox" title="用户停用" value="2">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户删除">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户修改">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户改密">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户列表">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户改密">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户列表">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户改密">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="用户列表">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-
-                        <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章管理"
-                               lay-filter="father">
-                    </td>
-                    <td>
-                        <div class="layui-input-block">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章添加">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章删除">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章修改">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章改密">
-                            <input name="id[]" lay-skin="primary" type="checkbox" value="2" title="文章列表">
-                        </div>
-                    </td>
-                </tr>
+                <#list list as sysMenu>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="${sysMenu.menuName}"" value="${sysMenu.id}" lay-skin="primary"
+                            lay-filter="father"
+                            title="${sysMenu.menuName}">
+                        </td>
+                        <td>
+                            <div class="layui-input-block">
+                                <#list sysMenu.child as childSysMenu>
+                                    <input name="${childSysMenu.menuName}" value="${childSysMenu.id}" lay-skin="primary"
+                                           type="checkbox" value="2"
+                                           title="${childSysMenu.menuName}">
+                                </#list>
+                            </div>
+                        </td>
+                    </tr>
+                </#list>
                 </tbody>
             </table>
         </div>
@@ -74,31 +58,50 @@
         var form = layui.form
             , layer = layui.layer;
 
-        //自定义验证规则
-        form.verify({
-            nikename: function (value) {
-                if (value.length < 5) {
-                    return '昵称至少得5个字符啊';
-                }
-            }
-            , pass: [/(.+){6,12}$/, '密码必须6到12位']
-            , repass: function (value) {
-                if ($('#L_pass').val() != $('#L_repass').val()) {
-                    return '两次密码不一致';
-                }
-            }
-        });
 
         //监听提交
         form.on('submit(add)', function (data) {
-            console.log(data);
-            //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6}, function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
+
+            var name = data.field.name;
+            var remark = data.field.name;
+            var ids = new Array();
+            var i = 0;
+            for (var a in data.field) {
+                if (a === "name" || a === "remark") {
+                    continue;
+                }
+                ids[i] = data.field[a];
+                i++;
+            }
+            console.log(ids);
+            $.ajax({
+                type: 'post',
+                url: "/sysRole/save",
+                data: {name: name, menuList: ids, remark: desc},
+                success: function (res) {
+                    if (res.status == 200) {
+                        layer.alert(res.msg, {icon: 6}, function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            //刷新页面
+                            parent.location.reload();
+                        });
+
+                    } else {
+                        layer.alert(res.msg, {icon: 5}, function () {
+                            // 获得frame索引
+                            var index = parent.layer.getFrameIndex(window.name);
+                            //关闭当前frame
+                            parent.layer.close(index);
+                            //刷新页面
+                            parent.location.reload();
+                        });
+                    }
+                }
             });
+
             return false;
         });
 

@@ -1,9 +1,15 @@
 package com.scaffolding.demo.controller;
 
+import com.scaffolding.demo.dto.RoleAddDto;
+import com.scaffolding.demo.entity.SysMenu;
 import com.scaffolding.demo.entity.SysRole;
+import com.scaffolding.demo.result.RestResult;
+import com.scaffolding.demo.service.SysMenuService;
 import com.scaffolding.demo.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,6 +27,9 @@ public class SysRoleController {
     @Autowired
     private SysRoleService sysRoleService;
 
+    @Autowired
+    private SysMenuService sysMenuService;
+
     private static final String PREFIX = "/system/admin";
 
     @RequestMapping("/admin-role")
@@ -34,9 +43,24 @@ public class SysRoleController {
     }
 
     @RequestMapping("/role-add")
-    public String roleAdd() {
+    public ModelAndView roleAdd() {
 
-        return PREFIX + "/role-add";
+        List<SysMenu> menusByRoleIds = sysMenuService.getMenus(null);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("list", menusByRoleIds);
+        modelAndView.setViewName(PREFIX + "/role-add");
+
+        return modelAndView;
+    }
+
+    @PostMapping("/save")
+    public RestResult roleAdd(@RequestBody RoleAddDto roleAddDto) {
+
+        sysRoleService.roleAdd(roleAddDto);
+
+
+        return RestResult.suc();
     }
 
 }

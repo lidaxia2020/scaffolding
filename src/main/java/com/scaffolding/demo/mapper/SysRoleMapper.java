@@ -9,4 +9,6 @@ import com.scaffolding.demo.entity.SysRole;
  * @date 2020/12/12 16:21
  */
 public interface SysRoleMapper extends BaseMapper<SysRole> {
+
+    int save(SysRole sysRole);
 }

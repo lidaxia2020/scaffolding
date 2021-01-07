@@ -1,6 +1,7 @@
 package com.scaffolding.demo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.scaffolding.demo.dto.RoleAddDto;
 import com.scaffolding.demo.entity.SysMenu;
 
 import java.util.List;
@@ -13,4 +14,9 @@ import java.util.List;
 public interface SysMenuService extends IService<SysMenu> {
 
     List<SysMenu> getMenusByRoleIds(List<Integer> roleIds);
+
+
+    List<SysMenu> getMenus(List<Integer> roleIds);
+
+
 }

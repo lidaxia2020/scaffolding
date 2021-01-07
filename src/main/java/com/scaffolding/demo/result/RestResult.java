@@ -12,6 +12,10 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RestResult<T> {
 
+    public static RestResult suc() {
+        return new RestResult(ResultCode.SUC);
+    }
+
 
     public static RestResult suc(Object data) {
         return new RestResult(ResultCode.SUC, data);
@@ -58,6 +62,5 @@ public class RestResult<T> {
         this(resultCode);
         this.data = data;
     }
-
 
 }
